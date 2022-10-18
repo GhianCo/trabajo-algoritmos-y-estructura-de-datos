@@ -10,7 +10,8 @@ import java.util.Comparator;
  *
  * @author ELIAS
  */
-public class Producto  implements Comparable<Producto> {
+public class Producto implements Comparable<Producto> {
+
     String nombre;
     int id;
     int id_categoria;
@@ -19,21 +20,22 @@ public class Producto  implements Comparable<Producto> {
     int cantvendida;
     String nombre_categoria;
 
-    
     @Override
-    
-    
+
     public int compareTo(Producto o) {
-        
-         return PRODUCTO_COMPARATOR_NATURAL_ORDER.compare(this, o);
+
+        return PRODUCTO_COMPARATOR_NATURAL_ORDER.compare(this, o);
     }
-    
-     private static final Comparator<Producto> PRODUCTO_COMPARATOR_NATURAL_ORDER = Comparator.comparing(Producto::getNombre);
-           
-     
+
+    private static final Comparator<Producto> PRODUCTO_COMPARATOR_NATURAL_ORDER = Comparator.comparing(Producto::getNombre);
+
+    public Comparator<Producto> bycantidad = Comparator.comparing(Producto::getCantvendida);
+
+    public Producto() {
+    }
+
 //     private static final Comparator<Producto> CAT_COMPARATOR_NATURAL_ORDER = Comparator.comparing
-    
-    public Producto(String nombre, int id, int id_categoria, double costo, double precio, int cantvendida,String nombre_categoria) {
+    public Producto(String nombre, int id, int id_categoria, double costo, double precio, int cantvendida, String nombre_categoria) {
         this.nombre = nombre;
         this.id = id;
         this.id_categoria = id_categoria;
@@ -67,7 +69,6 @@ public class Producto  implements Comparable<Producto> {
         this.nombre_categoria = nombre_categoria;
     }
 
-    
     public int getId_categoria() {
         return id_categoria;
     }
@@ -99,14 +100,11 @@ public class Producto  implements Comparable<Producto> {
     public void setCantvendida(int cantvendida) {
         this.cantvendida = cantvendida;
     }
-    
-     @Override
+
+    @Override
     public String toString() {
-        return "nombre = " + nombre + ", codigo = " + id + ", id_categoria = " + id_categoria 
-                +", costo = "+costo +", precio = "+precio + ", cantidad vendida = " +cantvendida;
+        return "nombre = " + nombre + ", codigo = " + id + ", id_categoria = " + id_categoria
+                + ", costo = " + costo + ", precio = " + precio + ", cantidad vendida = " + cantvendida;
     }
 
-    
-
-    
 }
