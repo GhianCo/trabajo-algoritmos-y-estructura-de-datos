@@ -41,6 +41,7 @@ public class MainForm extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         optProductList = new javax.swing.JMenuItem();
+        optProductCola = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +70,14 @@ public class MainForm extends javax.swing.JFrame {
         });
         jMenu2.add(optProductList);
 
+        optProductCola.setText("Cola prioritaria");
+        optProductCola.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optProductColaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(optProductCola);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -92,6 +101,12 @@ public class MainForm extends javax.swing.JFrame {
         mainDesktop.add(productList);
         productList.show();
     }//GEN-LAST:event_optProductListActionPerformed
+
+    private void optProductColaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optProductColaActionPerformed
+        ColaProductList colaProductList = new ColaProductList();
+        mainDesktop.add(colaProductList);
+        colaProductList.show();
+    }//GEN-LAST:event_optProductColaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,6 +148,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JDesktopPane mainDesktop;
+    private javax.swing.JMenuItem optProductCola;
     private javax.swing.JMenuItem optProductList;
     // End of variables declaration//GEN-END:variables
 }
