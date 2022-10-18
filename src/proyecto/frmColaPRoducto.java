@@ -21,14 +21,16 @@ import javax.swing.table.DefaultTableModel;
  * @author ELIAS
  */
 public class frmColaPRoducto extends javax.swing.JFrame {
-DefaultTableModel dtm = new DefaultTableModel();
+
+    DefaultTableModel dtm = new DefaultTableModel();
+
     /**
      * Creates new form frmColaPRoducto
      */
     public frmColaPRoducto() {
         initComponents();
         CentrarVentana();
-         CargarProductos();
+        CargarProductos();
     }
 
     /**
@@ -142,85 +144,79 @@ DefaultTableModel dtm = new DefaultTableModel();
         ColaPorCantidad();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void ColaPorCantidad(){
-        
-         String nombre;
-         String nombre_categoria;
-         int id;
-         int id_categoria;
-         double costo;
-         double precio;
-         int cantvendida;
-         Producto producto=new Producto();
-         
-         // COLA CON PRIORIDAD
-         Queue<Producto> ColaConPrioridad=new PriorityQueue<>(producto.bycantidad);
-        
-         
-         //SE LLENA LA COLA CON EL BUCLE
-           for (int i = 0; i < tblProductos.getRowCount(); i++) {
-             
-             id=i;
-             id_categoria=0;
-             nombre=tblProductos.getValueAt(i,0).toString();
-             nombre_categoria=tblProductos.getValueAt(i,1).toString();
-             costo=Double.parseDouble(tblProductos.getValueAt(i,2).toString()) ;
-             precio=Double.parseDouble(tblProductos.getValueAt(i,3).toString()) ;
-             cantvendida=Integer.parseInt(tblProductos.getValueAt(i,4).toString()) ;
+    private void ColaPorCantidad() {
 
-             Producto prod=new Producto(nombre,id, id_categoria, costo, precio,cantvendida,nombre_categoria);
-             ColaConPrioridad.add(prod);
-            
+        String nombre;
+        String nombre_categoria;
+        int id;
+        int id_categoria;
+        double costo;
+        double precio;
+        int cantvendida;
+        //Producto producto=new Producto();
+
+        // COLA CON PRIORIDAD
+        Queue<Producto> ColaConPrioridad = new PriorityQueue<>();
+
+        //SE LLENA LA COLA CON EL BUCLE
+        for (int i = 0; i < tblProductos.getRowCount(); i++) {
+
+            id = i;
+            id_categoria = 0;
+            nombre = tblProductos.getValueAt(i, 0).toString();
+            nombre_categoria = tblProductos.getValueAt(i, 1).toString();
+            costo = Double.parseDouble(tblProductos.getValueAt(i, 2).toString());
+            precio = Double.parseDouble(tblProductos.getValueAt(i, 3).toString());
+            cantvendida = Integer.parseInt(tblProductos.getValueAt(i, 4).toString());
+
+            Producto prod = new Producto(nombre, id, id_categoria, costo, precio, cantvendida, nombre_categoria);
+            ColaConPrioridad.add(prod);
+
         }
-         // SE LIMPIA LA TABLA
-         
-          LimpiarTabla();
-          
-//          
-          // SE VUELVE A LLENAR LA TABLA 
-             String[] fila = new String[5];
-          
-       while (!ColaConPrioridad.isEmpty()){
-           
-           
-            Producto ColaAtendida =ColaConPrioridad.poll();
-           
-           
-            fila[0] = ColaAtendida.getNombre();
-            fila[1] =ColaAtendida.getNombre();
-            fila[2] =String.valueOf(ColaAtendida.getCosto())  ;
-            fila[3] =String.valueOf(ColaAtendida.getPrecio())  ;
-            fila[4] =String.valueOf(ColaAtendida.getCantvendida())  ;
-              dtm.addRow(fila);
-            
-       }
-       
-       //UNA VEZ ATENDIDA LA COLA SE ELIMINA
-       
-       ColaConPrioridad.clear();
-       
-         lblitems.setText(String.valueOf( tblProductos.getRowCount()));
-       JOptionPane.showMessageDialog(rootPane, "Cola atendida");
-    }
-    
-     private void LimpiarTabla(){
-        //se limpia la tabla para volver a llenar con la lista ordenada
-         for (int i=tblProductos.getRowCount()-1;i>=0;i--)
-         {
-                        dtm.removeRow(i);
-         }
-          lblitems.setText(String.valueOf( tblProductos.getRowCount()));
-    }
-    
-   private void CargarProductos(){
+        // SE LIMPIA LA TABLA
 
-         String raiz= new File("").getAbsolutePath();
-         String archivo=raiz+"\\src\\proyecto\\data.csv";
-     
+        LimpiarTabla();
+
+//          
+        // SE VUELVE A LLENAR LA TABLA 
+        String[] fila = new String[5];
+
+        while (!ColaConPrioridad.isEmpty()) {
+
+            Producto ColaAtendida = ColaConPrioridad.poll();
+
+            fila[0] = ColaAtendida.getNombre();
+            fila[1] = ColaAtendida.getNombre();
+            fila[2] = String.valueOf(ColaAtendida.getCosto());
+            fila[3] = String.valueOf(ColaAtendida.getPrecio());
+            fila[4] = String.valueOf(ColaAtendida.getCantvendida());
+            dtm.addRow(fila);
+
+        }
+
+        //UNA VEZ ATENDIDA LA COLA SE ELIMINA
+        ColaConPrioridad.clear();
+
+        lblitems.setText(String.valueOf(tblProductos.getRowCount()));
+        JOptionPane.showMessageDialog(rootPane, "Cola atendida");
+    }
+
+    private void LimpiarTabla() {
+        //se limpia la tabla para volver a llenar con la lista ordenada
+        for (int i = tblProductos.getRowCount() - 1; i >= 0; i--) {
+            dtm.removeRow(i);
+        }
+        lblitems.setText(String.valueOf(tblProductos.getRowCount()));
+    }
+
+    private void CargarProductos() {
+
+        String raiz = new File("").getAbsolutePath();
+        String archivo = raiz + "\\src\\proyecto\\data.csv";
+
         String[] headers = new String[]{"Producto", "Categoria", "Costo S/", "Precio S/", "Cantidad vendida"};
         dtm.setColumnIdentifiers(headers);
         tblProductos.setModel(dtm);
-        
 
         String line = "";
         try {
@@ -238,37 +234,37 @@ DefaultTableModel dtm = new DefaultTableModel();
 
             }
             //tamaño de las columnas
-            lblitems.setText(String.valueOf( tblProductos.getRowCount()));
-             tamaños();
+            lblitems.setText(String.valueOf(tblProductos.getRowCount()));
+            tamaños();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-   }
-   
-   
-      private void tamaños(){
-   tblProductos.getColumnModel().getColumn(0).setMaxWidth(450);
-   tblProductos.getColumnModel().getColumn(0).setMinWidth(450);
-   tblProductos.getColumnModel().getColumn(0).setPreferredWidth(450);
-    
-   tblProductos.getColumnModel().getColumn(1).setMaxWidth(200);
-   tblProductos.getColumnModel().getColumn(1).setMinWidth(200);
-   tblProductos.getColumnModel().getColumn(1).setPreferredWidth(200);
-    
-   tblProductos.getColumnModel().getColumn(2).setMaxWidth(80);
-   tblProductos.getColumnModel().getColumn(2).setMinWidth(80);
-   tblProductos.getColumnModel().getColumn(2).setPreferredWidth(80);
-   
-   tblProductos.getColumnModel().getColumn(3).setMaxWidth(80);
-   tblProductos.getColumnModel().getColumn(3).setMinWidth(80);
-   tblProductos.getColumnModel().getColumn(3).setPreferredWidth(80);
-   
-   tblProductos.getColumnModel().getColumn(4).setMaxWidth(120);
-   tblProductos.getColumnModel().getColumn(4).setMinWidth(120);
-   tblProductos.getColumnModel().getColumn(4).setPreferredWidth(120);
-   }
+    }
+
+    private void tamaños() {
+        tblProductos.getColumnModel().getColumn(0).setMaxWidth(450);
+        tblProductos.getColumnModel().getColumn(0).setMinWidth(450);
+        tblProductos.getColumnModel().getColumn(0).setPreferredWidth(450);
+
+        tblProductos.getColumnModel().getColumn(1).setMaxWidth(200);
+        tblProductos.getColumnModel().getColumn(1).setMinWidth(200);
+        tblProductos.getColumnModel().getColumn(1).setPreferredWidth(200);
+
+        tblProductos.getColumnModel().getColumn(2).setMaxWidth(80);
+        tblProductos.getColumnModel().getColumn(2).setMinWidth(80);
+        tblProductos.getColumnModel().getColumn(2).setPreferredWidth(80);
+
+        tblProductos.getColumnModel().getColumn(3).setMaxWidth(80);
+        tblProductos.getColumnModel().getColumn(3).setMinWidth(80);
+        tblProductos.getColumnModel().getColumn(3).setPreferredWidth(80);
+
+        tblProductos.getColumnModel().getColumn(4).setMaxWidth(120);
+        tblProductos.getColumnModel().getColumn(4).setMinWidth(120);
+        tblProductos.getColumnModel().getColumn(4).setPreferredWidth(120);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -303,16 +299,17 @@ DefaultTableModel dtm = new DefaultTableModel();
             }
         });
     }
-    private void CentrarVentana(){
-      Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-      int height = pantalla.height;
-      int width = pantalla.width;
-      
-       int x= (width/2)-this.getWidth()/2;
-      int y=(height/2)-this.getHeight()/2;
-      
-      this.setLocation(x,y);
-     
+
+    private void CentrarVentana() {
+        Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = pantalla.height;
+        int width = pantalla.width;
+
+        int x = (width / 2) - this.getWidth() / 2;
+        int y = (height / 2) - this.getHeight() / 2;
+
+        this.setLocation(x, y);
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

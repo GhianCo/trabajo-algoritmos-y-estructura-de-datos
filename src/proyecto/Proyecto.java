@@ -16,16 +16,13 @@ public class Proyecto {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-         String path = "\\src\\proyecto\\data.csv";
-         String raiz= new File("").getAbsolutePath();
-        System.out.println(raiz+path);
-//         System.out.println(path);
-        
-        
-        
-        frmProductos productos=new frmProductos();
+
+        String path = "\\src\\proyecto\\data.csv";
+        String raiz = new File("").getAbsolutePath();
+        System.out.println(raiz + path);
+
+        MainForm productos = new MainForm();
         productos.setVisible(true);
     }
-    
+
 }

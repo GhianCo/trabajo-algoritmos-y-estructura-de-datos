@@ -272,9 +272,38 @@ public class frmProductos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        eliminarProducto();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        agregarProducto();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         actualizarProducto();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        switch ( cmbSorts.getSelectedIndex()){
+            case 0: MergeSort();
+            break;
+            case 1: BubleSort();
+            break;
+            case 2: SelectionSort();
+            break;
+            case 3: InsertioSort();
+            break;
+            case 4:  QuickSort();
+            break;
+
+            case 5:  ShellSort();
+            break;
+
+        }
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     
     private void BubleSort(){
@@ -550,37 +579,7 @@ public class frmProductos extends javax.swing.JFrame {
                         dtm.removeRow(i);
          }
     }
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        agregarProducto();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        eliminarProducto();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
-        switch ( cmbSorts.getSelectedIndex()){
-            case 0: MergeSort();
-                break;
-            case 1: BubleSort();
-                 break;
-            case 2: SelectionSort();
-                 break;
-            case 3: InsertioSort();
-                 break;
-            case 4:  QuickSort();
-                 break;
-                 
-             case 5:  ShellSort();
-                 break;     
-                 
-        }
-
-       
-    }//GEN-LAST:event_jButton4ActionPerformed
-   private void agregarProducto() {
+       private void agregarProducto() {
         dtm.addRow(new Object[]{
             txtProducto.getText(),
             txtCategoria.getText(),
