@@ -1,4 +1,4 @@
-package proyecto2;
+package proyecto;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -12,7 +12,9 @@ public class PrioridadCliente{
     Comparator <Cliente> porNumOrden=Comparator.comparing(Cliente::getnOrden);
     
     
-    Comparator<Cliente> total=porMembresia.thenComparing(porNombre).thenComparing(porEdad).thenComparing(porNumOrden);
+    Comparator<Cliente> total=porMembresia.thenComparing(porEdad).thenComparing(porNumOrden);
             
     Queue<Cliente> cola = new PriorityQueue<>(total);
+    
+    
 }

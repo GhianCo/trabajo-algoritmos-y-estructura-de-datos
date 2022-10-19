@@ -1,4 +1,4 @@
-package proyecto2;
+package proyecto;
 
 import java.util.LinkedList;
 

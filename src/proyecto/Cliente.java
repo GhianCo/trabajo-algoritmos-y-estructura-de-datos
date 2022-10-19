@@ -1,5 +1,7 @@
-package proyecto2;
-public class Cliente extends Pedido {
+package proyecto;
+public class Cliente  {
+    
+    
     public enum membresia{BLACK,ORO,PLATA,CLASICO};
 
     
@@ -10,6 +12,8 @@ public class Cliente extends Pedido {
     private int dni;
     private int telefono;
     private membresia membresia;
+    
+    
 
     public Cliente(int nOrden, String nombre, String apellido, int edad, int dni, int telefono, membresia membresia) {
         this.nOrden = nOrden;
