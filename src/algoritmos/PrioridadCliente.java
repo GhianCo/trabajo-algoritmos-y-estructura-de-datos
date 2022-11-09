@@ -17,5 +17,4 @@ public class PrioridadCliente{
             
     Queue<Cliente> cola = new PriorityQueue<>(total);
     
-    
 }
