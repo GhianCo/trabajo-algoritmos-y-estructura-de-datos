@@ -2,17 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package proyecto;
+package views;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
-import proyecto.Cliente.membresia;
+import models.Cliente;
+import models.Cliente.membresia;
 
-/**
- *
- * @author ELIAS
- */
 public class frmRegistroClientes extends javax.swing.JFrame {
 
     /**
@@ -20,10 +17,10 @@ public class frmRegistroClientes extends javax.swing.JFrame {
      */
     public frmRegistroClientes() {
         initComponents();
-        CentrarVentana() ;
+        CentrarVentana();
     }
-    
-       private void CentrarVentana() {
+
+    private void CentrarVentana() {
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int height = pantalla.height;
         int width = pantalla.width;
@@ -185,67 +182,65 @@ public class frmRegistroClientes extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         RegistrarCliente();
-        
+
         limpiar();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void RegistrarCliente(){
-        
-        
-        String nombre,apellido,membresiac;
-        int edad=0,dni=0,telefono=0;
-        int orden=0;
-        
-        nombre=txtnombre.getText();
-        apellido=txtapellido.getText();
-        telefono=Integer.parseInt(txtfono.getText()) ;
-        membresiac=cmbmembresia.getSelectedItem().toString();
-        edad=Integer.parseInt(txtedad.getText());
-        dni=Integer.parseInt(txtdni.getText());
-        
-        membresia m=    membresia.BLACK;
-     
-        
-        if (cmbmembresia.getSelectedIndex()==0) {
-             m=    membresia.BLACK;
-        } else if (cmbmembresia.getSelectedIndex()==1){
-             m=    membresia.ORO;
-        } else if (cmbmembresia.getSelectedIndex()==2){
-             m=    membresia.PLATA;
-        }else if (cmbmembresia.getSelectedIndex()==3){
-             m=    membresia.CLASICO;
+    private void RegistrarCliente() {
+
+        String nombre, apellido, membresiac;
+        int edad = 0, dni = 0, telefono = 0;
+        int orden = 0;
+
+        nombre = txtnombre.getText();
+        apellido = txtapellido.getText();
+        telefono = Integer.parseInt(txtfono.getText());
+        membresiac = cmbmembresia.getSelectedItem().toString();
+        edad = Integer.parseInt(txtedad.getText());
+        dni = Integer.parseInt(txtdni.getText());
+
+        membresia m = membresia.BLACK;
+
+        if (cmbmembresia.getSelectedIndex() == 0) {
+            m = membresia.BLACK;
+        } else if (cmbmembresia.getSelectedIndex() == 1) {
+            m = membresia.ORO;
+        } else if (cmbmembresia.getSelectedIndex() == 2) {
+            m = membresia.PLATA;
+        } else if (cmbmembresia.getSelectedIndex() == 3) {
+            m = membresia.CLASICO;
         }
-       
-        Cliente cliente=new Cliente(orden,nombre,apellido,edad,dni,telefono,m);
+
+        Cliente cliente = new Cliente(orden, nombre, apellido, edad, dni, telefono, m);
 
         String[] fila = new String[6];
-         fila[0] = cliente.getNombre();
-         fila[1] = cliente.getApellido();
-         fila[2] = String.valueOf( cliente.getEdad());
-         fila[3] = String.valueOf( cliente.getTelefono());
-         fila[4] = String.valueOf( cliente.getDni());;
-         fila[5] = String.valueOf( cliente.getMembresia());
-       
-        
-        DefaultTableModel dtm =(DefaultTableModel) jclientes.getModel();
-        
-         dtm.addRow(fila);
-        
+        fila[0] = cliente.getNombre();
+        fila[1] = cliente.getApellido();
+        fila[2] = String.valueOf(cliente.getEdad());
+        fila[3] = String.valueOf(cliente.getTelefono());
+        fila[4] = String.valueOf(cliente.getDni());;
+        fila[5] = String.valueOf(cliente.getMembresia());
+
+        DefaultTableModel dtm = (DefaultTableModel) jclientes.getModel();
+
+        dtm.addRow(fila);
+
     }
-    
-    private void limpiar(){
-        
-      txtnombre.setText("");
-      txtapellido.setText("");
-      txtfono.setText("");
-      cmbmembresia.setSelectedIndex(0);
-      txtedad.setText("");
-      txtdni.setText("");
-        
+
+    private void limpiar() {
+
+        txtnombre.setText("");
+        txtapellido.setText("");
+        txtfono.setText("");
+        cmbmembresia.setSelectedIndex(0);
+        txtedad.setText("");
+        txtdni.setText("");
+
     }
+
     /**
      * @param args the command line arguments
      */

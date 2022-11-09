@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package proyecto;
+package views;
 
+import algoritmos.MetodosSort;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
@@ -13,6 +14,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import models.Producto;
 
 /**
  *
@@ -305,11 +307,11 @@ public class ProductList extends javax.swing.JInternalFrame {
 
         for (int i = 0; i < listado.length; i++) {
 
-            fila[0] = listado[i].nombre;
-            fila[1] = listado[i].nombre_categoria;
-            fila[2] = String.valueOf(listado[i].costo);
-            fila[3] = String.valueOf(listado[i].precio);
-            fila[4] = String.valueOf(listado[i].cantvendida);
+            fila[0] = listado[i].getNombre();
+            fila[1] = listado[i].getNombre_categoria();
+            fila[2] = String.valueOf(listado[i].getCosto());
+            fila[3] = String.valueOf(listado[i].getPrecio());
+            fila[4] = String.valueOf(listado[i].getCantvendida());
 
             dtm.addRow(fila);
 
@@ -438,11 +440,11 @@ public class ProductList extends javax.swing.JInternalFrame {
 
         for (int i = 0; i < listado.length; i++) {
 
-            fila[0] = listado[i].nombre;
-            fila[1] = listado[i].nombre_categoria;
-            fila[2] = String.valueOf(listado[i].costo);
-            fila[3] = String.valueOf(listado[i].precio);
-            fila[4] = String.valueOf(listado[i].cantvendida);
+            fila[0] = listado[i].getNombre();
+            fila[1] = listado[i].getNombre_categoria();
+            fila[2] = String.valueOf(listado[i].getCosto());
+            fila[3] = String.valueOf(listado[i].getPrecio());
+            fila[4] = String.valueOf(listado[i].getCantvendida());
 
             dtm.addRow(fila);
 
@@ -581,7 +583,7 @@ public class ProductList extends javax.swing.JInternalFrame {
     private void CargarProductos() {
 
         String raiz = new File("").getAbsolutePath();
-        String archivo = raiz + "/src/proyecto/data.csv";
+        String archivo = raiz + "/src/data/data.csv";
 
         String[] headers = new String[]{"Producto", "Categoria", "Costo S/", "Precio S/", "Cantidad vendida"};
         dtm.setColumnIdentifiers(headers);

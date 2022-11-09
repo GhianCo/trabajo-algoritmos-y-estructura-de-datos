@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package proyecto;
+package views;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -10,11 +6,8 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.Pedido;
 
-/**
- *
- * @author ELIAS
- */
 public class frmListaPedidos extends javax.swing.JFrame {
 
     /**
@@ -24,8 +17,8 @@ public class frmListaPedidos extends javax.swing.JFrame {
         initComponents();
         CentrarVentana();
     }
-    
-          private void CentrarVentana() {
+
+    private void CentrarVentana() {
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int height = pantalla.height;
         int width = pantalla.width;
@@ -132,57 +125,56 @@ public class frmListaPedidos extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-          frmPedido pedido=new frmPedido();
-             pedido.setVisible(true);
+        frmPedido pedido = new frmPedido();
+        pedido.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        Pedido pedido=new Pedido();
-        Queue<Pedido> ColaConPrioridad=new PriorityQueue<>(pedido.ReglasDelNegocio);
-        
-        int orden=0;
-        String cliente="";
-        int edadcliente=0;
-        String membresia="";
-        int productos=0;
+
+        Pedido pedido = new Pedido();
+        Queue<Pedido> ColaConPrioridad = new PriorityQueue<>(pedido.ReglasDelNegocio);
+
+        int orden = 0;
+        String cliente = "";
+        int edadcliente = 0;
+        String membresia = "";
+        int productos = 0;
         double totalpedido;
         //Pedido(int orden, String cliente, int edadcliente, String membresia, int productos, double totalpedido)
-        
+
         for (int i = 0; i < jpedidos.getRowCount(); i++) {
 
-            orden = Integer.parseInt( jpedidos.getValueAt(i, 0).toString());
+            orden = Integer.parseInt(jpedidos.getValueAt(i, 0).toString());
             cliente = jpedidos.getValueAt(i, 1).toString();
-            edadcliente = Integer.parseInt( jpedidos.getValueAt(i, 2).toString());
-             membresia = jpedidos.getValueAt(i,3).toString();
-             productos = Integer.parseInt( jpedidos.getValueAt(i, 4).toString());
-             totalpedido = Double.parseDouble(jpedidos.getValueAt(i,5).toString());
-             
-           
+            edadcliente = Integer.parseInt(jpedidos.getValueAt(i, 2).toString());
+            membresia = jpedidos.getValueAt(i, 3).toString();
+            productos = Integer.parseInt(jpedidos.getValueAt(i, 4).toString());
+            totalpedido = Double.parseDouble(jpedidos.getValueAt(i, 5).toString());
+
             Pedido pedidod = new Pedido(orden, cliente, edadcliente, membresia, productos, totalpedido);
             ColaConPrioridad.add(pedidod);
 
         }
         // SE LIMPIA LA TABLA PARA REORDENAR LOS PEDIDOS
-       
-         JOptionPane.showMessageDialog(rootPane,"limpia tabla");
-         
-           DefaultTableModel dtm=(DefaultTableModel) jpedidos.getModel();
-         // SE VUELVE A LLENAR LA TABLA 
+
+        JOptionPane.showMessageDialog(rootPane, "limpia tabla");
+
+        DefaultTableModel dtm = (DefaultTableModel) jpedidos.getModel();
+        // SE VUELVE A LLENAR LA TABLA 
         String[] fila = new String[6];
 
         while (!ColaConPrioridad.isEmpty()) {
 
             Pedido ColaAtendida = ColaConPrioridad.poll();
 
-            fila[0] =  String.valueOf( ColaAtendida.getOrden());
+            fila[0] = String.valueOf(ColaAtendida.getOrden());
             fila[1] = ColaAtendida.getCliente();
             fila[2] = String.valueOf(ColaAtendida.getEdadcliente());
             fila[3] = String.valueOf(ColaAtendida.getMembresiaCliente());
@@ -191,22 +183,23 @@ public class frmListaPedidos extends javax.swing.JFrame {
             dtm.addRow(fila);
 
         }
-        
-          //UNA VEZ ATENDIDA LA COLA SE ELIMINA
+
+        //UNA VEZ ATENDIDA LA COLA SE ELIMINA
         ColaConPrioridad.clear();
-         
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
-  private void LimpiarTabla() {
+    private void LimpiarTabla() {
         //se limpia la tabla para volver a llenar con la lista ordenada
-        
-        DefaultTableModel dtm=(DefaultTableModel) jpedidos.getModel();
-        
+
+        DefaultTableModel dtm = (DefaultTableModel) jpedidos.getModel();
+
         for (int i = jpedidos.getRowCount() - 1; i >= 0; i--) {
             dtm.removeRow(i);
         }
         //lblitems.setText(String.valueOf(tblProductos.getRowCount()));
     }
+
     /**
      * @param args the command line arguments
      */

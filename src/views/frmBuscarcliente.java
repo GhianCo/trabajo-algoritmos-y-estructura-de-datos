@@ -1,47 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package proyecto;
+package views;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author ELIAS
- */
 public class frmBuscarcliente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmBuscarcliente
-     */
     public frmBuscarcliente() {
         initComponents();
         CentrarVentana();
         CargarClientes();
     }
-    
-    
-    private void CargarClientes(){
-        
-               DefaultTableModel dtm =(DefaultTableModel) this.jbuscar.getModel();
+
+    private void CargarClientes() {
+
+        DefaultTableModel dtm = (DefaultTableModel) this.jbuscar.getModel();
 //        
         String[] fila = new String[6];
 
-        
-      for(int i=0;i<frmRegistroClientes.jclientes.getRowCount();i++){
-          
-            fila[0] =frmRegistroClientes.jclientes.getValueAt(i, 0).toString();
+        for (int i = 0; i < frmRegistroClientes.jclientes.getRowCount(); i++) {
+
+            fila[0] = frmRegistroClientes.jclientes.getValueAt(i, 0).toString();
             fila[1] = frmRegistroClientes.jclientes.getValueAt(i, 1).toString();
-            fila[2] =frmRegistroClientes.jclientes.getValueAt(i, 2).toString();
-            fila[3] =frmRegistroClientes.jclientes.getValueAt(i, 3).toString();
+            fila[2] = frmRegistroClientes.jclientes.getValueAt(i, 2).toString();
+            fila[3] = frmRegistroClientes.jclientes.getValueAt(i, 3).toString();
             fila[4] = frmRegistroClientes.jclientes.getValueAt(i, 4).toString();
             fila[5] = frmRegistroClientes.jclientes.getValueAt(i, 5).toString();
             dtm.addRow(fila);
-      }
-        
+        }
+
     }
 
     /**
@@ -130,30 +117,29 @@ public class frmBuscarcliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         Registrar();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
-    
-    private void Registrar(){
-        
-        
-        int fila=jbuscar.getSelectedRow();
-        
-        String nombre=jbuscar.getValueAt(fila,0).toString();
-        String apellido=jbuscar.getValueAt(fila,1).toString();
-        String edad=jbuscar.getValueAt(fila,2).toString();
-        String membresia=jbuscar.getValueAt(fila,5).toString();
-        
-        frmPedido.txtcliente.setText(nombre+ " "+apellido);
+
+    private void Registrar() {
+
+        int fila = jbuscar.getSelectedRow();
+
+        String nombre = jbuscar.getValueAt(fila, 0).toString();
+        String apellido = jbuscar.getValueAt(fila, 1).toString();
+        String edad = jbuscar.getValueAt(fila, 2).toString();
+        String membresia = jbuscar.getValueAt(fila, 5).toString();
+
+        frmPedido.txtcliente.setText(nombre + " " + apellido);
         frmPedido.txtedad.setText(edad);
         frmPedido.txtmembresia.setText(membresia);
-        
+
         this.dispose();
-        
+
     }
-    
-      private void CentrarVentana() {
+
+    private void CentrarVentana() {
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int height = pantalla.height;
         int width = pantalla.width;
@@ -164,6 +150,7 @@ public class frmBuscarcliente extends javax.swing.JFrame {
         this.setLocation(x, y);
 
     }
+
     /**
      * @param args the command line arguments
      */

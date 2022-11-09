@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
-package proyecto;
+package views;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -15,11 +11,8 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.Producto;
 
-/**
- *
- * @author ghianco
- */
 public class ColaProductList extends javax.swing.JInternalFrame {
 
     DefaultTableModel dtm = new DefaultTableModel();
@@ -48,7 +41,7 @@ public class ColaProductList extends javax.swing.JInternalFrame {
     private void CargarProductos() {
 
         String raiz = new File("").getAbsolutePath();
-        String archivo = raiz + "/src/proyecto/data.csv";
+        String archivo = raiz + "/src/data/data.csv";
 
         String[] headers = new String[]{"Producto", "Categoria", "Costo S/", "Precio S/", "Cantidad vendida"};
         dtm.setColumnIdentifiers(headers);

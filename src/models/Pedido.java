@@ -1,4 +1,4 @@
-package proyecto;
+package models;
 
 import java.util.Comparator;
 

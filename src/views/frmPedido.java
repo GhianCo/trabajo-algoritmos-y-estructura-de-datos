@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package proyecto;
+package views;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -15,18 +15,17 @@ import javax.swing.table.DefaultTableModel;
  * @author ELIAS
  */
 public class frmPedido extends javax.swing.JFrame {
-    
-    
-       DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
-          
-            DecimalFormat decimal=new DecimalFormat("####.00",simbolos);
+
+    DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+
+    DecimalFormat decimal = new DecimalFormat("####.00", simbolos);
 
     /**
      * Creates new form frmPedido
      */
     public frmPedido() {
         initComponents();
-          simbolos.setDecimalSeparator('.');
+        simbolos.setDecimalSeparator('.');
         CentrarVentana();
     }
 
@@ -288,10 +287,10 @@ public class frmPedido extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        frmBuscarcliente buscar=new frmBuscarcliente();
-        
+        frmBuscarcliente buscar = new frmBuscarcliente();
+
         buscar.setVisible(true);
-        
+
 //        DefaultTableModel dtm =(DefaultTableModel) this.jbuscar.getModel();
 //        
 //        String[] fila = new String[6];
@@ -311,21 +310,21 @@ public class frmPedido extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        
+
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        frmBuscarProducto buscar =new frmBuscarProducto();
+
+        frmBuscarProducto buscar = new frmBuscarProducto();
         buscar.setVisible(true);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtcanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcanFocusLost
         // TODO add your handling code here:
-        
+
         totalitem();
     }//GEN-LAST:event_txtcanFocusLost
 
@@ -336,70 +335,68 @@ public class frmPedido extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        
-     int orden=0;
-     
-    String cliente=txtcliente.getText();
-    String edadcliente=txtedad.getText();
-    String Membresia=txtmembresia.getText() ;
-    String productos= txtproductos.getText();
-    String total=lbltotalpedido.getText();
-    
-    orden=frmListaPedidos.jpedidos.getRowCount()+1;
-    
-        String[] fila = new String[6];
-         fila[0] =String.valueOf( orden);
-         fila[1] = cliente;
-         fila[2] = edadcliente;
-         fila[3] = Membresia;
-         fila[4] = productos;
-         fila[5] =total;
-       
-        DefaultTableModel dtm =(DefaultTableModel) frmListaPedidos.jpedidos.getModel();
-        
-         dtm.addRow(fila);
-        
-         this.dispose();
-        
-    }//GEN-LAST:event_jButton4ActionPerformed
-    private void AgregarPedido(){
-        
-         String[] fila = new String[4];
-         fila[0] = txtproducto.getText();
-         fila[1] = txtcan.getText();
-         fila[2] = txtprecio.getText();
-         fila[3] = lbltotal.getText();
-        
-         
-        DefaultTableModel dtm =(DefaultTableModel) jpedido.getModel();
-        
-         dtm.addRow(fila);
-         totalpedido();
-        
-    }
-    
-    private void totalpedido(){
-        
-        double precio=0;
-        double total=0;
-        
-        int cantidad=0;
-        int totalcantidad=0;
-        
-         for (int i=0;i<jpedido.getRowCount();i++){
-        
-            precio=Double.parseDouble(jpedido.getValueAt(i, 3).toString());
-            total=total+precio;
-             cantidad=Integer.parseInt(jpedido.getValueAt(i, 1).toString());
-             totalcantidad=totalcantidad+cantidad;
-        }   
 
-         
-           lbltotalpedido.setText(String.valueOf(decimal.format(total)) );
-           txtproductos.setText(String.valueOf(totalcantidad) );
+        int orden = 0;
+
+        String cliente = txtcliente.getText();
+        String edadcliente = txtedad.getText();
+        String Membresia = txtmembresia.getText();
+        String productos = txtproductos.getText();
+        String total = lbltotalpedido.getText();
+
+        orden = frmListaPedidos.jpedidos.getRowCount() + 1;
+
+        String[] fila = new String[6];
+        fila[0] = String.valueOf(orden);
+        fila[1] = cliente;
+        fila[2] = edadcliente;
+        fila[3] = Membresia;
+        fila[4] = productos;
+        fila[5] = total;
+
+        DefaultTableModel dtm = (DefaultTableModel) frmListaPedidos.jpedidos.getModel();
+
+        dtm.addRow(fila);
+
+        this.dispose();
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+    private void AgregarPedido() {
+
+        String[] fila = new String[4];
+        fila[0] = txtproducto.getText();
+        fila[1] = txtcan.getText();
+        fila[2] = txtprecio.getText();
+        fila[3] = lbltotal.getText();
+
+        DefaultTableModel dtm = (DefaultTableModel) jpedido.getModel();
+
+        dtm.addRow(fila);
+        totalpedido();
+
     }
-    
-        private void CentrarVentana() {
+
+    private void totalpedido() {
+
+        double precio = 0;
+        double total = 0;
+
+        int cantidad = 0;
+        int totalcantidad = 0;
+
+        for (int i = 0; i < jpedido.getRowCount(); i++) {
+
+            precio = Double.parseDouble(jpedido.getValueAt(i, 3).toString());
+            total = total + precio;
+            cantidad = Integer.parseInt(jpedido.getValueAt(i, 1).toString());
+            totalcantidad = totalcantidad + cantidad;
+        }
+
+        lbltotalpedido.setText(String.valueOf(decimal.format(total)));
+        txtproductos.setText(String.valueOf(totalcantidad));
+    }
+
+    private void CentrarVentana() {
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int height = pantalla.height;
         int width = pantalla.width;
@@ -410,20 +407,18 @@ public class frmPedido extends javax.swing.JFrame {
         this.setLocation(x, y);
 
     }
-        
-        private void totalitem(){
-            
-            int cantidad = Integer.parseInt( txtcan.getText());
-            
-            double precio=Double.parseDouble(txtprecio.getText());
-            
-            double total=cantidad* precio;
-            
-         
-            
-              lbltotal.setText(String.valueOf(decimal.format(total)) );
-            
-        }
+
+    private void totalitem() {
+
+        int cantidad = Integer.parseInt(txtcan.getText());
+
+        double precio = Double.parseDouble(txtprecio.getText());
+
+        double total = cantidad * precio;
+
+        lbltotal.setText(String.valueOf(decimal.format(total)));
+
+    }
 
     /**
      * @param args the command line arguments

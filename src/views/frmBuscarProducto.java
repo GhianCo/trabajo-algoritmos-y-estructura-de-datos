@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package proyecto;
+package views;
 
+import algoritmos.MetodosSort;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
@@ -13,26 +10,25 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import models.Producto;
 
-/**
- *
- * @author ELIAS
- */
 public class frmBuscarProducto extends javax.swing.JFrame {
-DefaultTableModel dtm = new DefaultTableModel();
+
+    DefaultTableModel dtm = new DefaultTableModel();
+
     /**
      * Creates new form frmBuscarProducto
      */
     public frmBuscarProducto() {
         initComponents();
-           CentrarVentana();
+        CentrarVentana();
         CargarProductos();
     }
-    
-    
-    private void ListarProductos(){
-        
+
+    private void ListarProductos() {
+
     }
+
     private void CentrarVentana() {
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         int height = pantalla.height;
@@ -44,12 +40,11 @@ DefaultTableModel dtm = new DefaultTableModel();
         this.setLocation(x, y);
 
     }
-    
-    
-        private void CargarProductos() {
+
+    private void CargarProductos() {
 
         String raiz = new File("").getAbsolutePath();
-        String archivo = raiz + "/src/proyecto/data.csv";
+        String archivo = raiz + "/src/data/data.csv";
 
         String[] headers = new String[]{"Producto", "Categoria", "Costo S/", "Precio S/", "Cantidad vendida"};
         dtm.setColumnIdentifiers(headers);
@@ -213,52 +208,50 @@ DefaultTableModel dtm = new DefaultTableModel();
 
         switch (selectSorts.getSelectedIndex()) {
             case 0:
-            MergeSort();
-            break;
+                MergeSort();
+                break;
             case 1:
-            BubleSort();
-            break;
+                BubleSort();
+                break;
             case 2:
-            SelectionSort();
-            break;
+                SelectionSort();
+                break;
             case 3:
-            InsertioSort();
-            break;
+                InsertioSort();
+                break;
             case 4:
-            QuickSort();
-            break;
+                QuickSort();
+                break;
 
             case 5:
-            ShellSort();
-            break;
+                ShellSort();
+                break;
 
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       RegistrarPRoducto();
+        RegistrarPRoducto();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void RegistrarPRoducto(){
-      int fila=tblProductos.getSelectedRow();  
-      
-      String producto=tblProductos.getValueAt(fila,0).toString();
-      String precio=  tblProductos.getValueAt(fila,3).toString();
-      
-      frmPedido.txtproducto.setText(producto);
-      frmPedido.txtprecio.setText(precio);
-      
-      this.dispose();
-        
-        
+    private void RegistrarPRoducto() {
+        int fila = tblProductos.getSelectedRow();
+
+        String producto = tblProductos.getValueAt(fila, 0).toString();
+        String precio = tblProductos.getValueAt(fila, 3).toString();
+
+        frmPedido.txtproducto.setText(producto);
+        frmPedido.txtprecio.setText(precio);
+
+        this.dispose();
+
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
-      private void BubleSort() {
+    private void BubleSort() {
 
         int tamaño_array = tblProductos.getRowCount();
         Producto listado[] = new Producto[tamaño_array];
@@ -295,11 +288,11 @@ DefaultTableModel dtm = new DefaultTableModel();
 
         for (int i = 0; i < listado.length; i++) {
 
-            fila[0] = listado[i].nombre;
-            fila[1] = listado[i].nombre_categoria;
-            fila[2] = String.valueOf(listado[i].costo);
-            fila[3] = String.valueOf(listado[i].precio);
-            fila[4] = String.valueOf(listado[i].cantvendida);
+            fila[0] = listado[i].getNombre();
+            fila[1] = listado[i].getNombre_categoria();
+            fila[2] = String.valueOf(listado[i].getCosto());
+            fila[3] = String.valueOf(listado[i].getPrecio());
+            fila[4] = String.valueOf(listado[i].getCantvendida());
 
             dtm.addRow(fila);
 
@@ -428,11 +421,11 @@ DefaultTableModel dtm = new DefaultTableModel();
 
         for (int i = 0; i < listado.length; i++) {
 
-            fila[0] = listado[i].nombre;
-            fila[1] = listado[i].nombre_categoria;
-            fila[2] = String.valueOf(listado[i].costo);
-            fila[3] = String.valueOf(listado[i].precio);
-            fila[4] = String.valueOf(listado[i].cantvendida);
+            fila[0] = listado[i].getNombre();
+            fila[1] = listado[i].getNombre_categoria();
+            fila[2] = String.valueOf(listado[i].getCosto());
+            fila[3] = String.valueOf(listado[i].getPrecio());
+            fila[4] = String.valueOf(listado[i].getCantvendida());
 
             dtm.addRow(fila);
 
@@ -530,6 +523,7 @@ DefaultTableModel dtm = new DefaultTableModel();
             dtm.removeRow(i);
         }
     }
+
     /**
      * @param args the command line arguments
      */
