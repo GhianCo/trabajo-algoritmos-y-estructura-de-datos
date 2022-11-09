@@ -15,7 +15,7 @@ public class frmBuscarcliente extends javax.swing.JFrame {
     private void CargarClientes() {
 
         DefaultTableModel dtm = (DefaultTableModel) this.jbuscar.getModel();
-//        
+
         String[] fila = new String[6];
 
         for (int i = 0; i < frmRegistroClientes.jclientes.getRowCount(); i++) {
