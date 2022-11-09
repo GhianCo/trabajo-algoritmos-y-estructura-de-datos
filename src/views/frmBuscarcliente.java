@@ -18,7 +18,7 @@ public class frmBuscarcliente extends javax.swing.JFrame {
 
         String[] fila = new String[6];
 
-        for (int i = 0; i < frmRegistroClientes.jclientes.getRowCount(); i++) {
+        /*for (int i = 0; i < frmRegistroClientes.jclientes.getRowCount(); i++) {
 
             fila[0] = frmRegistroClientes.jclientes.getValueAt(i, 0).toString();
             fila[1] = frmRegistroClientes.jclientes.getValueAt(i, 1).toString();
@@ -27,7 +27,7 @@ public class frmBuscarcliente extends javax.swing.JFrame {
             fila[4] = frmRegistroClientes.jclientes.getValueAt(i, 4).toString();
             fila[5] = frmRegistroClientes.jclientes.getValueAt(i, 5).toString();
             dtm.addRow(fila);
-        }
+        }*/
 
     }
 
