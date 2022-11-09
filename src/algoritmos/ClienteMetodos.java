@@ -11,7 +11,6 @@ public class ClienteMetodos extends PrioridadCliente{
     }
 
     public void enqueue(Cliente e) {
-        //elementos.addLast(e);
         cola.offer(e);
     }
 
