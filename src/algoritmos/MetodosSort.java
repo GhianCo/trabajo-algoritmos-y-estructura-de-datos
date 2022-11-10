@@ -1,7 +1,7 @@
 package algoritmos;
 
 import java.util.ArrayList;
-import models.Producto;
+import models.entities.Producto;
 
 public class MetodosSort {
 
@@ -46,10 +46,10 @@ public class MetodosSort {
             Producto aux;
             pivote = izq;
             while (izq != der) {
-                while (products.get(der).getPrecio() >= products.get(pivote).getPrecio() && izq < der) {
+                while (products.get(der).getProducto_precio() >= products.get(pivote).getProducto_precio() && izq < der) {
                     der--;
                 }
-                while (products.get(izq).getPrecio() < products.get(pivote).getPrecio() && izq < der) {
+                while (products.get(izq).getProducto_precio() < products.get(pivote).getProducto_precio() && izq < der) {
                     izq++;
                 }
                 if (der != izq) {
@@ -74,7 +74,7 @@ public class MetodosSort {
             for (int i = gap; i < n; i++) {
 
                 for (int j = i; j >= gap; j -= gap) {
-                    if (productos.get(j - gap).getCantvendida() > productos.get(j).getCantvendida()) {
+                    if (productos.get(j - gap).getProducto_cantvendida() > productos.get(j).getProducto_cantvendida()) {
                         swap(productos, j, j - gap);
                     }
 
@@ -91,15 +91,15 @@ public class MetodosSort {
         while (i < productos.size()) {
 
             aux = productos.get(i);
-            
+
             for (int k = i - 1; k >= 0; k--) {
 
-                if (productos.get(k).getCosto() > aux.getCosto()) {
+                if (productos.get(k).getProducto_costo() > aux.getProducto_costo()) {
 
                     productos.set(k + 1, productos.get(k));
                     productos.set(k, aux);
 
-                    System.out.println(productos.get(k).getCosto());
+                    System.out.println(productos.get(k).getProducto_costo());
                 }
 
             }
@@ -160,7 +160,7 @@ public class MetodosSort {
         int rightIndex = midIndex + 1;
 
         while (leftIndex <= midIndex && rightIndex <= endIndex) {
-            if (productos.get(leftIndex).getCantvendida() <= productos.get(rightIndex).getCantvendida()) {
+            if (productos.get(leftIndex).getProducto_cantvendida()<= productos.get(rightIndex).getProducto_cantvendida()) {
                 mergedSortedArray.add(productos.get(leftIndex));
                 leftIndex++;
             } else {

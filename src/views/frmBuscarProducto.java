@@ -10,7 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import models.Producto;
+import models.entities.Producto;
 
 public class frmBuscarProducto extends javax.swing.JFrame {
 
@@ -288,11 +288,11 @@ public class frmBuscarProducto extends javax.swing.JFrame {
 
         for (int i = 0; i < listado.length; i++) {
 
-            fila[0] = listado[i].getNombre();
-            fila[1] = listado[i].getNombre_categoria();
-            fila[2] = String.valueOf(listado[i].getCosto());
-            fila[3] = String.valueOf(listado[i].getPrecio());
-            fila[4] = String.valueOf(listado[i].getCantvendida());
+            fila[0] = listado[i].getProducto_nombre();
+            fila[1] = listado[i].getCategoria_nombre();
+            fila[2] = String.valueOf(listado[i].getProducto_costo());
+            fila[3] = String.valueOf(listado[i].getProducto_precio());
+            fila[4] = String.valueOf(listado[i].getProducto_cantvendida());
 
             dtm.addRow(fila);
 
@@ -332,11 +332,11 @@ public class frmBuscarProducto extends javax.swing.JFrame {
         String[] fila = new String[5];
         for (Producto item : productos) {
 
-            fila[0] = item.getNombre();
-            fila[1] = item.getNombre();
-            fila[2] = String.valueOf(item.getCosto());
-            fila[3] = String.valueOf(item.getPrecio());
-            fila[4] = String.valueOf(item.getCantvendida());
+            fila[0] = item.getProducto_nombre();
+            fila[1] = item.getCategoria_nombre();
+            fila[2] = String.valueOf(item.getProducto_costo());
+            fila[3] = String.valueOf(item.getProducto_precio());
+            fila[4] = String.valueOf(item.getProducto_cantvendida());
             dtm.addRow(fila);
         }
 
@@ -374,11 +374,11 @@ public class frmBuscarProducto extends javax.swing.JFrame {
         String[] fila = new String[5];
         for (Producto item : productos) {
 
-            fila[0] = item.getNombre();
-            fila[1] = item.getNombre();
-            fila[2] = String.valueOf(item.getCosto());
-            fila[3] = String.valueOf(item.getPrecio());
-            fila[4] = String.valueOf(item.getCantvendida());
+           fila[0] = item.getProducto_nombre();
+            fila[1] = item.getCategoria_nombre();
+            fila[2] = String.valueOf(item.getProducto_costo());
+            fila[3] = String.valueOf(item.getProducto_precio());
+            fila[4] = String.valueOf(item.getProducto_cantvendida());
             dtm.addRow(fila);
         }
 
@@ -421,11 +421,11 @@ public class frmBuscarProducto extends javax.swing.JFrame {
 
         for (int i = 0; i < listado.length; i++) {
 
-            fila[0] = listado[i].getNombre();
-            fila[1] = listado[i].getNombre_categoria();
-            fila[2] = String.valueOf(listado[i].getCosto());
-            fila[3] = String.valueOf(listado[i].getPrecio());
-            fila[4] = String.valueOf(listado[i].getCantvendida());
+            fila[0] = listado[i].getProducto_nombre();
+            fila[1] = listado[i].getCategoria_nombre();
+            fila[2] = String.valueOf(listado[i].getProducto_costo());
+            fila[3] = String.valueOf(listado[i].getProducto_precio());
+            fila[4] = String.valueOf(listado[i].getProducto_cantvendida());
 
             dtm.addRow(fila);
 
@@ -465,11 +465,11 @@ public class frmBuscarProducto extends javax.swing.JFrame {
         String[] fila = new String[5];
         for (Producto item : productos) {
 
-            fila[0] = item.getNombre();
-            fila[1] = item.getNombre();
-            fila[2] = String.valueOf(item.getCosto());
-            fila[3] = String.valueOf(item.getPrecio());
-            fila[4] = String.valueOf(item.getCantvendida());
+            fila[0] = item.getProducto_nombre();
+            fila[1] = item.getCategoria_nombre();
+            fila[2] = String.valueOf(item.getProducto_costo());
+            fila[3] = String.valueOf(item.getProducto_precio());
+            fila[4] = String.valueOf(item.getProducto_cantvendida());
             dtm.addRow(fila);
         }
 
@@ -506,12 +506,11 @@ public class frmBuscarProducto extends javax.swing.JFrame {
         // se vuelve a llenar la tabla
         String[] fila = new String[5];
         for (Producto item : productos) {
-
-            fila[0] = item.getNombre();
-            fila[1] = item.getNombre();
-            fila[2] = String.valueOf(item.getCosto());
-            fila[3] = String.valueOf(item.getPrecio());
-            fila[4] = String.valueOf(item.getCantvendida());
+            fila[0] = item.getProducto_nombre();
+            fila[1] = item.getCategoria_nombre();
+            fila[2] = String.valueOf(item.getProducto_costo());
+            fila[3] = String.valueOf(item.getProducto_precio());
+            fila[4] = String.valueOf(item.getProducto_cantvendida());
             dtm.addRow(fila);
         }
 

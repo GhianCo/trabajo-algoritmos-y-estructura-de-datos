@@ -3,7 +3,7 @@ package algoritmos;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import models.Cliente;
+import models.entities.Cliente;
 
 public class PrioridadCliente{
 

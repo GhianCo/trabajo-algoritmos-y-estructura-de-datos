@@ -7,8 +7,8 @@ package views;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
-import models.Cliente;
-import models.Cliente.membresia;
+import models.entities.Cliente;
+import models.entities.Cliente.membresia;
 
 public class frmRegistroClientes extends javax.swing.JFrame {
 

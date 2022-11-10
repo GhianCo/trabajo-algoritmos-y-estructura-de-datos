@@ -1,4 +1,4 @@
-package models;
+package models.entities;
 
 public class Cliente  {
     
@@ -14,7 +14,8 @@ public class Cliente  {
     private int telefono;
     private membresia membresia;
     
-    
+    public Cliente() {
+    }
 
     public Cliente(int nOrden, String nombre, String apellido, int edad, int dni, int telefono, membresia membresia) {
         this.nOrden = nOrden;

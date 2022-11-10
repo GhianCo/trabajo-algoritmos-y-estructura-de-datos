@@ -1,4 +1,4 @@
-package models;
+package models.entities;
 
 import java.util.Comparator;
 
@@ -16,6 +16,9 @@ public class Pedido {
     int productos;
     double totalpedido;
 
+    public Pedido() {
+    }
+    
     public Pedido(int orden, String cliente, int edadcliente, String membresia, int productos, double totalpedido) {
         this.orden = orden;
         this.cliente = cliente;
@@ -24,12 +27,7 @@ public class Pedido {
         this.productos = productos;
         this.totalpedido = totalpedido;
     }
-
-    public Pedido() {
-    }
     
-    
-
     public int getOrden() {
         return orden;
     }

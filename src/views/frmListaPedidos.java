@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import models.Pedido;
+import models.entities.Pedido;
 
 public class frmListaPedidos extends javax.swing.JFrame {
 

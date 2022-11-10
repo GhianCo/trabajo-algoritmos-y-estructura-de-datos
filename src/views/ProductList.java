@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package views;
 
 import algoritmos.MetodosSort;
@@ -14,12 +10,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import models.Producto;
+import models.entities.Producto;
 
-/**
- *
- * @author ghianco
- */
 public class ProductList extends javax.swing.JInternalFrame {
 
     DefaultTableModel dtm = new DefaultTableModel();
@@ -271,53 +263,53 @@ public class ProductList extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BubleSort() {
-
+    private Producto[] callListToOrder() {
         int tamaño_array = tblProductos.getRowCount();
         Producto listado[] = new Producto[tamaño_array];
 
-        String nombre;
-        String nombre_categoria;
-        int id;
-        int id_categoria;
-        double costo;
-        double precio;
-        int cantvendida;
+        Producto producto = new Producto();
 
         for (int i = 0; i < tblProductos.getRowCount(); i++) {
 
-            id = i;
-            id_categoria = 0;
-            nombre = tblProductos.getValueAt(i, 0).toString();
-            nombre_categoria = tblProductos.getValueAt(i, 1).toString();
-            costo = Double.parseDouble(tblProductos.getValueAt(i, 2).toString());
-            precio = Double.parseDouble(tblProductos.getValueAt(i, 3).toString());
-            cantvendida = Integer.parseInt(tblProductos.getValueAt(i, 4).toString());
+            producto.setCategoria_id(0);
+            producto.setProducto_nombre(tblProductos.getValueAt(i, 0).toString());
+            producto.setProducto_costo(Double.parseDouble(tblProductos.getValueAt(i, 2).toString()));
+            producto.setProducto_precio(Double.parseDouble(tblProductos.getValueAt(i, 3).toString()));
+            producto.setProducto_cantvendida(Integer.parseInt(tblProductos.getValueAt(i, 4).toString()));
+            producto.setCategoria_nombre(tblProductos.getValueAt(i, 1).toString());
 
-            listado[i] = new Producto(nombre, id, id_categoria, costo, precio, cantvendida, nombre_categoria);
+            listado[i] = producto;
+        }
+
+        return listado;
+    }
+
+    private void drawDataInList(Producto[] listado) {
+        //se vuelve a llenar la tabla
+        String[] fila = new String[5];
+
+        for (int i = 0; i < listado.length; i++) {
+
+            fila[0] = listado[i].getProducto_nombre();
+            fila[1] = String.valueOf(listado[i].getCategoria_id());
+            fila[2] = String.valueOf(listado[i].getProducto_costo());
+            fila[3] = String.valueOf(listado[i].getProducto_precio());
+            fila[4] = String.valueOf(listado[i].getProducto_cantvendida());
+
+            dtm.addRow(fila);
 
         }
+    }
+
+    private void BubleSort() {
+        Producto listado[] = callListToOrder();
 
         MetodosSort metodos = new MetodosSort();
         metodos.bubbleSort(listado);
 
         //se limpia la tabla para volver a llenar con la lista ordenada
         LimpiarTabla();
-        //se vuelve a llenar la tabla
-        String[] fila = new String[5];
-
-        for (int i = 0; i < listado.length; i++) {
-
-            fila[0] = listado[i].getNombre();
-            fila[1] = listado[i].getNombre_categoria();
-            fila[2] = String.valueOf(listado[i].getCosto());
-            fila[3] = String.valueOf(listado[i].getPrecio());
-            fila[4] = String.valueOf(listado[i].getCantvendida());
-
-            dtm.addRow(fila);
-
-        }
-
+        drawDataInList(listado);
     }
 
     private void QuickSort() {
@@ -352,11 +344,11 @@ public class ProductList extends javax.swing.JInternalFrame {
         String[] fila = new String[5];
         for (Producto item : productos) {
 
-            fila[0] = item.getNombre();
-            fila[1] = item.getNombre();
-            fila[2] = String.valueOf(item.getCosto());
-            fila[3] = String.valueOf(item.getPrecio());
-            fila[4] = String.valueOf(item.getCantvendida());
+            fila[0] = item.getProducto_nombre();
+            fila[1] = item.getCategoria_nombre();
+            fila[2] = String.valueOf(item.getProducto_costo());
+            fila[3] = String.valueOf(item.getProducto_precio());
+            fila[4] = String.valueOf(item.getProducto_cantvendida());
             dtm.addRow(fila);
         }
 
@@ -394,11 +386,11 @@ public class ProductList extends javax.swing.JInternalFrame {
         String[] fila = new String[5];
         for (Producto item : productos) {
 
-            fila[0] = item.getNombre();
-            fila[1] = item.getNombre();
-            fila[2] = String.valueOf(item.getCosto());
-            fila[3] = String.valueOf(item.getPrecio());
-            fila[4] = String.valueOf(item.getCantvendida());
+            fila[0] = item.getProducto_nombre();
+            fila[1] = item.getCategoria_nombre();
+            fila[2] = String.valueOf(item.getProducto_costo());
+            fila[3] = String.valueOf(item.getProducto_precio());
+            fila[4] = String.valueOf(item.getProducto_cantvendida());
             dtm.addRow(fila);
         }
 
@@ -441,11 +433,11 @@ public class ProductList extends javax.swing.JInternalFrame {
 
         for (int i = 0; i < listado.length; i++) {
 
-            fila[0] = listado[i].getNombre();
-            fila[1] = listado[i].getNombre_categoria();
-            fila[2] = String.valueOf(listado[i].getCosto());
-            fila[3] = String.valueOf(listado[i].getPrecio());
-            fila[4] = String.valueOf(listado[i].getCantvendida());
+            fila[0] = listado[i].getProducto_nombre();
+            fila[1] = listado[i].getCategoria_nombre();
+            fila[2] = String.valueOf(listado[i].getProducto_costo());
+            fila[3] = String.valueOf(listado[i].getProducto_precio());
+            fila[4] = String.valueOf(listado[i].getProducto_cantvendida());
 
             dtm.addRow(fila);
 
@@ -485,11 +477,11 @@ public class ProductList extends javax.swing.JInternalFrame {
         String[] fila = new String[5];
         for (Producto item : productos) {
 
-            fila[0] = item.getNombre();
-            fila[1] = item.getNombre();
-            fila[2] = String.valueOf(item.getCosto());
-            fila[3] = String.valueOf(item.getPrecio());
-            fila[4] = String.valueOf(item.getCantvendida());
+            fila[0] = item.getProducto_nombre();
+            fila[1] = item.getCategoria_nombre();
+            fila[2] = String.valueOf(item.getProducto_costo());
+            fila[3] = String.valueOf(item.getProducto_precio());
+            fila[4] = String.valueOf(item.getProducto_cantvendida());
             dtm.addRow(fila);
         }
 
@@ -527,11 +519,11 @@ public class ProductList extends javax.swing.JInternalFrame {
         String[] fila = new String[5];
         for (Producto item : productos) {
 
-            fila[0] = item.getNombre();
-            fila[1] = item.getNombre();
-            fila[2] = String.valueOf(item.getCosto());
-            fila[3] = String.valueOf(item.getPrecio());
-            fila[4] = String.valueOf(item.getCantvendida());
+            fila[0] = item.getProducto_nombre();
+            fila[1] = item.getCategoria_nombre();
+            fila[2] = String.valueOf(item.getProducto_costo());
+            fila[3] = String.valueOf(item.getProducto_precio());
+            fila[4] = String.valueOf(item.getProducto_cantvendida());
             dtm.addRow(fila);
         }
 

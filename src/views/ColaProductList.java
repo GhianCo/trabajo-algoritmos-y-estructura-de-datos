@@ -11,7 +11,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import models.Producto;
+import models.entities.Producto;
 
 public class ColaProductList extends javax.swing.JInternalFrame {
 
@@ -245,11 +245,11 @@ public class ColaProductList extends javax.swing.JInternalFrame {
 
             Producto ColaAtendida = ColaConPrioridad.poll();
 
-            fila[0] = ColaAtendida.getNombre();
-            fila[1] = ColaAtendida.getNombre();
-            fila[2] = String.valueOf(ColaAtendida.getCosto());
-            fila[3] = String.valueOf(ColaAtendida.getPrecio());
-            fila[4] = String.valueOf(ColaAtendida.getCantvendida());
+            fila[0] = ColaAtendida.getProducto_nombre();
+            fila[1] = ColaAtendida.getCategoria_nombre();
+            fila[2] = String.valueOf(ColaAtendida.getProducto_costo());
+            fila[3] = String.valueOf(ColaAtendida.getProducto_precio());
+            fila[4] = String.valueOf(ColaAtendida.getProducto_cantvendida());
             dtm.addRow(fila);
 
         }

@@ -1,7 +1,7 @@
 package algoritmos;
 
 import java.util.LinkedList;
-import models.Cliente;
+import models.entities.Cliente;
 
 public class ClienteMetodos extends PrioridadCliente{
 
