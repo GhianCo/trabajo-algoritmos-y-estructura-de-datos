@@ -1,0 +1,2 @@
+create procedure sp_findAll_Producto()
+	select p.producto_id, p.producto_nombre, c.categoria_nombre, p.producto_costo, p.producto_precio, p.producto_cantvendida from producto p, categoria c where c.categoria_id = p.categoria_id;
