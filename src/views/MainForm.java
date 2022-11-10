@@ -2,12 +2,8 @@ package views;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import models.entities.Producto;
-import services.ProductoService;
-import services.impl.ProductoServiceImpl;
 
 public class MainForm extends javax.swing.JFrame {
 
@@ -18,10 +14,6 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         CentrarVentana();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-        ProductoService productoService = new ProductoServiceImpl();
-        List<Producto> productos = productoService.listar();
-        System.out.println("hola");
     }
 
     private void CentrarVentana() {

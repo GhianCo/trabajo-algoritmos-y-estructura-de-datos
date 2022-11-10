@@ -39,8 +39,8 @@ public class ProductoDaoDatabase implements ProductoDao {
             while (resultSet.next()) {
                 producto = new Producto();
                 producto.setProducto_id(resultSet.getInt(1));
-                producto.setCategoria_id(resultSet.getInt(2));
-                producto.setProducto_nombre(resultSet.getString(3));
+                producto.setProducto_nombre(resultSet.getString(2));
+                producto.setCategoria_nombre(resultSet.getString(3));
                 producto.setProducto_costo(resultSet.getInt(4));
                 producto.setProducto_precio(resultSet.getInt(5));
                 producto.setProducto_cantvendida(resultSet.getInt(6));
