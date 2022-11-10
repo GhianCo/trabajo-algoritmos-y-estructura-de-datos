@@ -4,8 +4,17 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import utils.DBConn;
 
 public class MainForm extends javax.swing.JFrame {
+
+    private Connection con;
+    private ResultSet rs;
+    private CallableStatement cst;
 
     /**
      * Creates new form MainForm
@@ -14,6 +23,17 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         CentrarVentana();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        try {
+            con = DBConn.getConnection();
+            cst = con.prepareCall("{CALL sp_findAll_Producto()}");
+            rs = cst.executeQuery();
+            while(rs.next()) {
+                System.out.println(rs.getString(3));
+            }
+        } catch (SQLException ex) {
+
+        }
+
     }
 
     private void CentrarVentana() {
@@ -153,33 +173,32 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        frmRegistroClientes clientes=new frmRegistroClientes();
+        frmRegistroClientes clientes = new frmRegistroClientes();
         clientes.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
         // TODO add your handling code here:
-        
-          
+
+
     }//GEN-LAST:event_jMenu5ActionPerformed
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
         // TODO add your handling code here:
-        
-        int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Está seguro de salir del sistema?","Confirmar",2);
-             if (confirmacion==0) {
-        
-        System.exit(WIDTH);
-             }
+
+        int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Está seguro de salir del sistema?", "Confirmar", 2);
+        if (confirmacion == 0) {
+
+            System.exit(WIDTH);
+        }
     }//GEN-LAST:event_jMenu5MouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        
+
 //             frmPedido pedido=new frmPedido();
 //             pedido.setVisible(true);
-
-        frmListaPedidos lista =new frmListaPedidos();
+        frmListaPedidos lista = new frmListaPedidos();
         lista.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
