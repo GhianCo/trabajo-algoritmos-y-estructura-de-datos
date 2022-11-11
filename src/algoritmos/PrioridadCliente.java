@@ -8,9 +8,9 @@ import models.entities.Cliente;
 public class PrioridadCliente{
 
     Comparator <Cliente> porMembresia= Comparator.comparing(Cliente::getMembresia);
-    Comparator <Cliente> porNombre=Comparator.comparing(Cliente::getNombre); 
+    Comparator <Cliente> porNombre=Comparator.comparing(Cliente::getCliente_nombres); 
     Comparator <Cliente> porEdad=Comparator.comparing(Cliente::getEdad); 
-    Comparator <Cliente> porNumOrden=Comparator.comparing(Cliente::getnOrden);
+    Comparator <Cliente> porNumOrden=Comparator.comparing(Cliente::getCliente_orden);
     
     
     Comparator<Cliente> total=porMembresia.thenComparing(porEdad).thenComparing(porNumOrden);

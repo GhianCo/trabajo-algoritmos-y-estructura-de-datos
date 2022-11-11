@@ -214,20 +214,20 @@ public class frmRegistroClientes extends javax.swing.JFrame {
             m = membresia.CLASICO;
         }
 
-        Cliente cliente = new Cliente(orden, nombre, apellido, edad, dni, telefono, m);
-
-        String[] fila = new String[6];
-        fila[0] = cliente.getNombre();
-        fila[1] = cliente.getApellido();
-        fila[2] = String.valueOf(cliente.getEdad());
-        fila[3] = String.valueOf(cliente.getTelefono());
-        fila[4] = String.valueOf(cliente.getDni());;
-        fila[5] = String.valueOf(cliente.getMembresia());
+//        Cliente cliente = new Cliente(orden, nombre, apellido, edad, dni, telefono, m);
+//
+//        String[] fila = new String[6];
+//        fila[0] = cliente.getNombre();
+//        fila[1] = cliente.getApellido();
+//        fila[2] = String.valueOf(cliente.getEdad());
+//        fila[3] = String.valueOf(cliente.getTelefono());
+//        fila[4] = String.valueOf(cliente.getDni());;
+//        fila[5] = String.valueOf(cliente.getMembresia());
 
         DefaultTableModel dtm = (DefaultTableModel) jclientes.getModel();
 
-        dtm.addRow(fila);
-
+//        dtm.addRow(fila);
+//
     }
 
     private void limpiar() {

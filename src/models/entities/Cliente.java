@@ -6,125 +6,94 @@ public class Cliente  {
     public enum membresia{BLACK,ORO,PLATA,CLASICO};
 
     
-    private int nOrden;
-    private String nombre;
-    private String apellido;
+
+    int cliente_id;
+    int membresia_id;
+    String  cliente_orden;
+    private String cliente_nombres;
+    private String cliente_apellidos;
     private int edad;
-    private int dni;
-    private int telefono;
+    private String telefono;
     private membresia membresia;
     
     public Cliente() {
+        
     }
 
-    public Cliente(int nOrden, String nombre, String apellido, int edad, int dni, int telefono, membresia membresia) {
-        this.nOrden = nOrden;
-        this.nombre = nombre;
-        this.apellido = apellido;
+    public Cliente(int cliente_id, int membresia_id, String cliente_orden, String cliente_nombres, String cliente_apellidos, int edad, String telefono, membresia membresia) {
+        this.cliente_id = cliente_id;
+        this.membresia_id = membresia_id;
+        this.cliente_orden = cliente_orden;
+        this.cliente_nombres = cliente_nombres;
+        this.cliente_apellidos = cliente_apellidos;
         this.edad = edad;
-        this.dni = dni;
         this.telefono = telefono;
         this.membresia = membresia;
     }
 
-    /**
-     * @return the nOrden
-     */
-    public int getnOrden() {
-        return nOrden;
+    public int getCliente_id() {
+        return cliente_id;
     }
 
-    /**
-     * @param nOrden the nOrden to set
-     */
-    public void setnOrden(int nOrden) {
-        this.nOrden = nOrden;
+    public void setCliente_id(int cliente_id) {
+        this.cliente_id = cliente_id;
     }
 
-    /**
-     * @return the nombre
-     */
-    public String getNombre() {
-        return nombre;
+    public int getMembresia_id() {
+        return membresia_id;
     }
 
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setMembresia_id(int membresia_id) {
+        this.membresia_id = membresia_id;
     }
 
-    /**
-     * @return the apellido
-     */
-    public String getApellido() {
-        return apellido;
+    public String getCliente_orden() {
+        return cliente_orden;
     }
 
-    /**
-     * @param apellido the apellido to set
-     */
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setCliente_orden(String cliente_orden) {
+        this.cliente_orden = cliente_orden;
     }
 
-    /**
-     * @return the edad
-     */
+    public String getCliente_nombres() {
+        return cliente_nombres;
+    }
+
+    public void setCliente_nombres(String cliente_nombres) {
+        this.cliente_nombres = cliente_nombres;
+    }
+
+    public String getCliente_apellidos() {
+        return cliente_apellidos;
+    }
+
+    public void setCliente_apellidos(String cliente_apellidos) {
+        this.cliente_apellidos = cliente_apellidos;
+    }
+
     public int getEdad() {
         return edad;
     }
 
-    /**
-     * @param edad the edad to set
-     */
     public void setEdad(int edad) {
         this.edad = edad;
     }
 
-    /**
-     * @return the dni
-     */
-    public int getDni() {
-        return dni;
-    }
-
-    /**
-     * @param dni the dni to set
-     */
-    public void setDni(int dni) {
-        this.dni = dni;
-    }
-
-    /**
-     * @return the telefono
-     */
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    /**
-     * @param telefono the telefono to set
-     */
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-    /**
-     * @return the membresia
-     */
     public membresia getMembresia() {
         return membresia;
     }
 
-    /**
-     * @param membresia the membresia to set
-     */
     public void setMembresia(membresia membresia) {
         this.membresia = membresia;
     }
-    
     
     
 }
