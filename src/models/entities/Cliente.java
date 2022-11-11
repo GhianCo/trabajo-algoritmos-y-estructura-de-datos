@@ -2,33 +2,30 @@ package models.entities;
 
 public class Cliente  {
     
-    
     public enum membresia{BLACK,ORO,PLATA,CLASICO};
-
-    
 
     int cliente_id;
     int membresia_id;
     String  cliente_orden;
     private String cliente_nombres;
     private String cliente_apellidos;
-    private int edad;
-    private String telefono;
-    private membresia membresia;
+    private int cliente_edad;
+    private String cliente_telefono;
+    private String membresia_nombre;
     
     public Cliente() {
         
     }
 
-    public Cliente(int cliente_id, int membresia_id, String cliente_orden, String cliente_nombres, String cliente_apellidos, int edad, String telefono, membresia membresia) {
+    public Cliente(int cliente_id, int membresia_id, String cliente_orden, String cliente_nombres, String cliente_apellidos, int edad, String telefono, String membresia) {
         this.cliente_id = cliente_id;
         this.membresia_id = membresia_id;
         this.cliente_orden = cliente_orden;
         this.cliente_nombres = cliente_nombres;
         this.cliente_apellidos = cliente_apellidos;
-        this.edad = edad;
-        this.telefono = telefono;
-        this.membresia = membresia;
+        this.cliente_edad = edad;
+        this.cliente_telefono = telefono;
+        this.membresia_nombre = membresia;
     }
 
     public int getCliente_id() {
@@ -71,28 +68,28 @@ public class Cliente  {
         this.cliente_apellidos = cliente_apellidos;
     }
 
-    public int getEdad() {
-        return edad;
+    public int getCliente_edad() {
+        return cliente_edad;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setCliente_edad(int cliente_edad) {
+        this.cliente_edad = cliente_edad;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getCliente_telefono() {
+        return cliente_telefono;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setCliente_telefono(String cliente_telefono) {
+        this.cliente_telefono = cliente_telefono;
     }
 
-    public membresia getMembresia() {
-        return membresia;
+    public String getMembresia_nombre() {
+        return membresia_nombre;
     }
 
-    public void setMembresia(membresia membresia) {
-        this.membresia = membresia;
+    public void setMembresia_nombre(String membresia_nombre) {
+        this.membresia_nombre = membresia_nombre;
     }
     
     

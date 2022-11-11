@@ -1,5 +1,6 @@
 package models.dao.impl;
 
+import models.dao.ClienteDao;
 import models.dao.ProductoDao;
 
 public class DaoFactory {
@@ -18,5 +19,9 @@ public class DaoFactory {
     
     public ProductoDao getProductoDao() {
         return new ProductoDaoDatabase();
+    }
+    
+    public ClienteDao getClienteDao() {
+        return new ClienteDaoDatabase();
     }
 }

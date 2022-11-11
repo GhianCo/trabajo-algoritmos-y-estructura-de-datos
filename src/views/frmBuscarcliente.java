@@ -2,7 +2,11 @@ package views;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import models.entities.Cliente;
+import services.ClienteService;
+import services.impl.ClienteServiceImpl;
 
 public class frmBuscarcliente extends javax.swing.JFrame {
 
@@ -16,18 +20,20 @@ public class frmBuscarcliente extends javax.swing.JFrame {
 
         DefaultTableModel dtm = (DefaultTableModel) this.jbuscar.getModel();
 
-        String[] fila = new String[6];
+        String[] fila = new String[5];
+        
+        ClienteService clienteService = new ClienteServiceImpl();
+        List<Cliente> clientes = clienteService.listar();
+        
+        for (int i = 0; i < clientes.size(); i++) {
 
-        /*for (int i = 0; i < frmRegistroClientes.jclientes.getRowCount(); i++) {
-
-            fila[0] = frmRegistroClientes.jclientes.getValueAt(i, 0).toString();
-            fila[1] = frmRegistroClientes.jclientes.getValueAt(i, 1).toString();
-            fila[2] = frmRegistroClientes.jclientes.getValueAt(i, 2).toString();
-            fila[3] = frmRegistroClientes.jclientes.getValueAt(i, 3).toString();
-            fila[4] = frmRegistroClientes.jclientes.getValueAt(i, 4).toString();
-            fila[5] = frmRegistroClientes.jclientes.getValueAt(i, 5).toString();
+            fila[0] = clientes.get(i).getCliente_nombres();
+            fila[1] = clientes.get(i).getCliente_apellidos();
+            fila[2] = String.valueOf(clientes.get(i).getCliente_edad());
+            fila[3] = clientes.get(i).getCliente_telefono();
+            fila[4] = clientes.get(i).getMembresia_nombre();
             dtm.addRow(fila);
-        }*/
+        }
 
     }
 
@@ -53,7 +59,7 @@ public class frmBuscarcliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "NOMBRES", "APELLIDOS", "EDAD", "TELEFONO", "DNI", "MEMBRESIA"
+                "NOMBRES", "APELLIDOS", "EDAD", "TELEFONO", "MEMBRESIA"
             }
         ));
         jScrollPane1.setViewportView(jbuscar);
@@ -129,7 +135,7 @@ public class frmBuscarcliente extends javax.swing.JFrame {
         String nombre = jbuscar.getValueAt(fila, 0).toString();
         String apellido = jbuscar.getValueAt(fila, 1).toString();
         String edad = jbuscar.getValueAt(fila, 2).toString();
-        String membresia = jbuscar.getValueAt(fila, 5).toString();
+        String membresia = jbuscar.getValueAt(fila, 4).toString();
 
         frmPedido.txtcliente.setText(nombre + " " + apellido);
         frmPedido.txtedad.setText(edad);
