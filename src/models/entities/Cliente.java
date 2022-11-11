@@ -9,7 +9,7 @@ public class Cliente  {
     String  cliente_orden;
     private String cliente_nombres;
     private String cliente_apellidos;
-    private int cliente_edad;
+    private String cliente_edad;
     private String cliente_telefono;
     private String membresia_nombre;
     
@@ -17,7 +17,7 @@ public class Cliente  {
         
     }
 
-    public Cliente(int cliente_id, int membresia_id, String cliente_orden, String cliente_nombres, String cliente_apellidos, int edad, String telefono, String membresia) {
+    public Cliente(int cliente_id, int membresia_id, String cliente_orden, String cliente_nombres, String cliente_apellidos, String edad, String telefono, String membresia) {
         this.cliente_id = cliente_id;
         this.membresia_id = membresia_id;
         this.cliente_orden = cliente_orden;
@@ -68,11 +68,11 @@ public class Cliente  {
         this.cliente_apellidos = cliente_apellidos;
     }
 
-    public int getCliente_edad() {
+    public String getCliente_edad() {
         return cliente_edad;
     }
 
-    public void setCliente_edad(int cliente_edad) {
+    public void setCliente_edad(String cliente_edad) {
         this.cliente_edad = cliente_edad;
     }
 

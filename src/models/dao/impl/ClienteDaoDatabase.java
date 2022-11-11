@@ -17,13 +17,69 @@ public class ClienteDaoDatabase implements ClienteDao {
     private CallableStatement callableStatement;
 
     @Override
-    public void create(Cliente entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void create(Cliente cliente) {
+
+        try {
+            connection = DBConn.getConnection();
+            connection.setAutoCommit(false);
+            callableStatement = connection.prepareCall("{CALL sp_insert_Cliente(?,?,?,?,?,?)}");
+
+            callableStatement.setInt(1, cliente.getMembresia_id());
+            callableStatement.setString(2, cliente.getCliente_orden());
+            callableStatement.setString(3, cliente.getCliente_nombres());
+            callableStatement.setString(4, cliente.getCliente_apellidos());
+            callableStatement.setString(5, cliente.getCliente_edad());
+            callableStatement.setString(6, cliente.getCliente_telefono());
+
+            callableStatement.executeUpdate();
+            connection.commit();
+            callableStatement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            try {
+                connection.rollback();
+                callableStatement.close();
+                connection.close();
+            } catch (SQLException exp) {
+                System.out.println(exp.getMessage());
+            }
+        }
     }
 
     @Override
     public Cliente find(Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Cliente cliente = null;
+
+        try {
+            connection = DBConn.getConnection();
+            callableStatement = connection.prepareCall("{CALL sp_find_Cliente(?)}");
+            callableStatement.setString(1, id.toString());
+            resultSet = callableStatement.executeQuery();
+
+            if (resultSet.next()) {
+                cliente = new Cliente();
+                cliente.setCliente_id(resultSet.getInt(1));
+                cliente.setCliente_nombres(resultSet.getString(2));
+                cliente.setCliente_apellidos(resultSet.getString(3));
+                cliente.setMembresia_nombre(resultSet.getString(4));
+                cliente.setCliente_edad(resultSet.getString(5));
+                cliente.setCliente_telefono(resultSet.getString(6));
+            }
+
+            resultSet.close();
+            callableStatement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            try {
+                resultSet.close();
+                callableStatement.close();
+                connection.close();
+            } catch (SQLException exp) {
+                System.out.println(exp.getMessage());
+            }
+        }
+
+        return cliente;
     }
 
     @Override
@@ -42,7 +98,7 @@ public class ClienteDaoDatabase implements ClienteDao {
                 cliente.setCliente_nombres(resultSet.getString(2));
                 cliente.setCliente_apellidos(resultSet.getString(3));
                 cliente.setMembresia_nombre(resultSet.getString(4));
-                cliente.setCliente_edad(resultSet.getInt(5));
+                cliente.setCliente_edad(resultSet.getString(5));
                 cliente.setCliente_telefono(resultSet.getString(6));
                 clientes.add(cliente);
             }
@@ -64,13 +120,51 @@ public class ClienteDaoDatabase implements ClienteDao {
     }
 
     @Override
-    public void update(Cliente entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(Cliente cliente) {
+        try {
+            connection = DBConn.getConnection();
+            callableStatement = connection.prepareCall("{CALL sp_update_Cliente(?,?,?,?,?,?,?)}");
+
+            callableStatement.setInt(1, cliente.getCliente_id());
+            callableStatement.setInt(2, cliente.getMembresia_id());
+            callableStatement.setString(3, cliente.getCliente_orden());
+            callableStatement.setString(4, cliente.getCliente_nombres());
+            callableStatement.setString(5, cliente.getCliente_apellidos());
+            callableStatement.setString(6, cliente.getCliente_edad());
+            callableStatement.setString(7, cliente.getCliente_telefono());
+
+            callableStatement.executeUpdate();
+            callableStatement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            try {
+                callableStatement.close();
+                connection.close();
+            } catch (SQLException exp) {
+                System.out.println(exp.getMessage());
+            }
+        }
     }
 
     @Override
     public void delete(Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            connection = DBConn.getConnection();
+            callableStatement = connection.prepareCall("{CALL sp_delete_Cliente(?)}");
+
+            callableStatement.setInt(1, Integer.parseInt(id.toString()));
+
+            callableStatement.executeUpdate();
+            callableStatement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            try {
+                callableStatement.close();
+                connection.close();
+            } catch (SQLException exp) {
+                System.out.println(exp.getMessage());
+            }
+        }
     }
 
 }

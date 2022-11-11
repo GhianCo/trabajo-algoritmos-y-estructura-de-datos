@@ -17,7 +17,7 @@ public class ProductoDaoDatabase implements ProductoDao {
     private CallableStatement callableStatement;
 
     @Override
-    public void create(Producto entity) {
+    public void create(Producto producto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -64,7 +64,7 @@ public class ProductoDaoDatabase implements ProductoDao {
     }
 
     @Override
-    public void update(Producto entity) {
+    public void update(Producto producto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
