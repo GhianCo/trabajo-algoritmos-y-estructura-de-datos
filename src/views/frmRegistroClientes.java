@@ -1,14 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package views;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.entities.Cliente;
 import models.entities.Cliente.membresia;
+import services.ClienteService;
+import services.impl.ClienteServiceImpl;
 
 public class frmRegistroClientes extends javax.swing.JFrame {
 
@@ -18,6 +17,7 @@ public class frmRegistroClientes extends javax.swing.JFrame {
     public frmRegistroClientes() {
         initComponents();
         CentrarVentana();
+        CargarClientes();
     }
 
     private void CentrarVentana() {
@@ -32,6 +32,26 @@ public class frmRegistroClientes extends javax.swing.JFrame {
 
     }
 
+     private void CargarClientes() {
+        DefaultTableModel dtm = (DefaultTableModel) jclientes.getModel();
+        String[] fila = new String[5];
+        
+        ClienteService clienteService = new ClienteServiceImpl();
+        List<Cliente> clientes = clienteService.listar();
+        
+        for (int i = 0; i < clientes.size(); i++) {
+
+            fila[0] = clientes.get(i).getCliente_nombres();
+            fila[1] = clientes.get(i).getCliente_apellidos();
+            fila[2] = String.valueOf(clientes.get(i).getCliente_edad());
+            fila[3] = clientes.get(i).getCliente_telefono();
+            fila[4] = clientes.get(i).getMembresia_nombre();
+            dtm.addRow(fila);
+        }
+
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,7 +111,7 @@ public class frmRegistroClientes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "NOMBRES", "APELLIDOS", "EDAD", "TELEFONO", "DNI", "MEMBRESIA"
+                "NOMBRES", "APELLIDOS", "EDAD", "TELEFONO", "MEMBRESIA"
             }
         ));
         jScrollPane1.setViewportView(jclientes);
@@ -214,20 +234,6 @@ public class frmRegistroClientes extends javax.swing.JFrame {
             m = membresia.CLASICO;
         }
 
-//        Cliente cliente = new Cliente(orden, nombre, apellido, edad, dni, telefono, m);
-//
-//        String[] fila = new String[6];
-//        fila[0] = cliente.getNombre();
-//        fila[1] = cliente.getApellido();
-//        fila[2] = String.valueOf(cliente.getEdad());
-//        fila[3] = String.valueOf(cliente.getTelefono());
-//        fila[4] = String.valueOf(cliente.getDni());;
-//        fila[5] = String.valueOf(cliente.getMembresia());
-
-        DefaultTableModel dtm = (DefaultTableModel) jclientes.getModel();
-
-//        dtm.addRow(fila);
-//
     }
 
     private void limpiar() {
