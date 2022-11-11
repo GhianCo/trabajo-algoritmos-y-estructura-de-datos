@@ -3,14 +3,12 @@ package views;
 import algoritmos.MetodosSort;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.entities.Producto;
+import services.ProductoService;
+import services.impl.ProductoServiceImpl;
 
 public class frmBuscarProducto extends javax.swing.JFrame {
 
@@ -42,10 +40,6 @@ public class frmBuscarProducto extends javax.swing.JFrame {
     }
 
     private void CargarProductos() {
-
-        String raiz = new File("").getAbsolutePath();
-        String archivo = raiz + "/src/data/data.csv";
-
         String[] headers = new String[]{"Producto", "Categoria", "Costo S/", "Precio S/", "Cantidad vendida"};
         dtm.setColumnIdentifiers(headers);
         tblProductos.setModel(dtm);
@@ -57,28 +51,18 @@ public class frmBuscarProducto extends javax.swing.JFrame {
         selectSorts.addItem("Ordenar por precio | Quick sort");
         selectSorts.addItem("Ordenar por cantidad vendida | Shell sort");
 
-        String line = "";
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(archivo));
-            while ((line = br.readLine()) != null) {
-                String[] campos = line.split(",");
+        ProductoService productoService = new ProductoServiceImpl();
+        List<Producto> productos = productoService.listar();
 
-                dtm.addRow(new Object[]{
-                    campos[0],
-                    campos[1],
-                    campos[2],
-                    campos[3],
-                    campos[4]
-                });
-
-            }
-            //tamaño de las columnas
-//            tamaños();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (Integer count = 0; count < productos.size(); count++) {
+            dtm.addRow(new Object[]{
+                productos.get(count).getProducto_nombre(),
+                productos.get(count).getCategoria_nombre(),
+                productos.get(count).getProducto_costo(),
+                productos.get(count).getProducto_precio(),
+                productos.get(count).getProducto_cantvendida(),});
         }
+
     }
 
     /**
@@ -132,7 +116,7 @@ public class frmBuscarProducto extends javax.swing.JFrame {
 
         selectSorts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Valid.png"))); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Valid.png"))); // NOI18N
         jButton7.setText("Ordenar productos");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +133,7 @@ public class frmBuscarProducto extends javax.swing.JFrame {
                 .addComponent(selectSorts, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton7)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,7 +358,7 @@ public class frmBuscarProducto extends javax.swing.JFrame {
         String[] fila = new String[5];
         for (Producto item : productos) {
 
-           fila[0] = item.getProducto_nombre();
+            fila[0] = item.getProducto_nombre();
             fila[1] = item.getCategoria_nombre();
             fila[2] = String.valueOf(item.getProducto_costo());
             fila[3] = String.valueOf(item.getProducto_precio());

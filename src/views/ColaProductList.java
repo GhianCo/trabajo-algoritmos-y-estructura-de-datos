@@ -7,11 +7,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.entities.Producto;
+import services.ProductoService;
+import services.impl.ProductoServiceImpl;
 
 public class ColaProductList extends javax.swing.JInternalFrame {
 
@@ -40,36 +43,23 @@ public class ColaProductList extends javax.swing.JInternalFrame {
 
     private void CargarProductos() {
 
-        String raiz = new File("").getAbsolutePath();
-        String archivo = raiz + "/src/data/data.csv";
-
         String[] headers = new String[]{"Producto", "Categoria", "Costo S/", "Precio S/", "Cantidad vendida"};
         dtm.setColumnIdentifiers(headers);
         tblProductos.setModel(dtm);
-
-        String line = "";
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(archivo));
-            while ((line = br.readLine()) != null) {
-                String[] campos = line.split(",");
-
-                dtm.addRow(new Object[]{
-                    campos[0],
-                    campos[1],
-                    campos[2],
-                    campos[3],
-                    campos[4]
-                });
-
-            }
-            //tamaño de las columnas
-            lblitems.setText(String.valueOf(tblProductos.getRowCount()));
-            tamaños();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        
+        ProductoService productoService = new ProductoServiceImpl();
+        List<Producto> productos = productoService.listar();
+        
+        for (Integer count = 0; count < productos.size(); count++) {
+            dtm.addRow(new Object[]{
+                productos.get(count).getProducto_nombre(),
+                productos.get(count).getCategoria_nombre(),
+                productos.get(count).getProducto_costo(),
+                productos.get(count).getProducto_precio(),
+                productos.get(count).getProducto_cantvendida(),
+            });
         }
+
     }
 
     private void tamaños() {
