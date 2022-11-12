@@ -2,11 +2,14 @@ package views;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.entities.Pedido;
+import models.entities.PedidoConProducto;
+import services.impl.PedidoConProductoServiceImpl;
 
 public class frmListaPedidos extends javax.swing.JFrame {
 
@@ -16,6 +19,17 @@ public class frmListaPedidos extends javax.swing.JFrame {
     public frmListaPedidos() {
         initComponents();
         CentrarVentana();
+        CargarPedidos();
+
+    }
+
+    private void CargarPedidos() {
+        PedidoConProductoServiceImpl productoService = new PedidoConProductoServiceImpl();
+        List<PedidoConProducto> pedidos = productoService.listar();
+
+        for (Integer count = 0; count < pedidos.size(); count++) {
+            System.out.println(pedidos.get(count).getProducto_nombre());
+        }
     }
 
     private void CentrarVentana() {
