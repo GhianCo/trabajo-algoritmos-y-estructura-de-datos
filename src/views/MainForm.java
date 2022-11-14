@@ -55,11 +55,11 @@ public class MainForm extends javax.swing.JFrame {
         mainDesktop.setLayout(mainDesktopLayout);
         mainDesktopLayout.setHorizontalGroup(
             mainDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 921, Short.MAX_VALUE)
+            .addGap(0, 1110, Short.MAX_VALUE)
         );
         mainDesktopLayout.setVerticalGroup(
             mainDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 529, Short.MAX_VALUE)
+            .addGap(0, 634, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Principal");

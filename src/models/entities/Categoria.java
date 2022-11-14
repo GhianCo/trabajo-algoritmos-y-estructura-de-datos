@@ -20,6 +20,11 @@ public class Categoria {
         this.categoria_nombre = categoria_nombre;
     }
 
+    public Categoria() {
+    }
+    
+    
+
     public int getCategoria_id() {
         return categoria_id;
     }

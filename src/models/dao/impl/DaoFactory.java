@@ -1,5 +1,6 @@
 package models.dao.impl;
 
+import models.dao.CategoriaDao;
 import models.dao.ClienteDao;
 import models.dao.PedidoConProductoDao;
 import models.dao.ProductoDao;
@@ -28,5 +29,9 @@ public class DaoFactory {
 
     public PedidoConProductoDao getPedidoConProductoDao() {
         return new PedidoConProductoDaoDatabase();
+    }
+    
+    public CategoriaDao getCategoriaDao() {
+        return new CategoriaDaoDatabase();
     }
 }
