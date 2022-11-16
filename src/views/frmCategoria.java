@@ -5,6 +5,7 @@
 package views;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.entities.Categoria;
 import services.CategoriaService;
@@ -162,7 +163,7 @@ public class frmCategoria extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +183,7 @@ public class frmCategoria extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -196,8 +197,31 @@ public class frmCategoria extends javax.swing.JInternalFrame {
 
     private void cmdguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdguardarActionPerformed
         // TODO add your handling code here:
+        
+        if (txtnombre.getText().length() > 0) {
+            
+            
          EstadoBotones(true);
        
+         Categoria categoria=new Categoria();
+         
+         categoria.setCategoria_nombre(txtnombre.getText());
+         
+         CategoriaService categoriaService = new CategoriaServiceImpl();
+         categoriaService.crear(categoria);
+         
+             JOptionPane.showMessageDialog(rootPane, "Se registro correctamente", "Registro de categoria", HEIGHT, frameIcon);
+             txtnombre.setText("");
+             ListarCategorias();
+         
+        }else{
+                        
+            JOptionPane.showMessageDialog(rootPane, "Ingrese un nombre para la categoria", "Registro de categoria", HEIGHT, frameIcon);
+       
+        }
+        
+        
+         
      
     }//GEN-LAST:event_cmdguardarActionPerformed
 
