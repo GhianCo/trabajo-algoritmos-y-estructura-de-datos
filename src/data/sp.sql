@@ -16,7 +16,7 @@ create procedure sp_update_Cliente(in cliente_id int, in membresia_id int, in cl
 /*CATEGORIA*/
 
 create procedure sp_findAll_Categoria()
-select c.categoria_id,categoria_categoriaid,categoria_nombrecategoria from categoria c ;	
+ select c.categoria_id,categoria_categoriaid,categoria_nombre from categoria c ;
 
 create procedure sp_find_Categoria(in categoria_id int)
 	select c.categoria_id,categoria_categoriaid,categoria_nombrecategoria from categoria c where c.categoria_id=categoria_id;

@@ -4,6 +4,12 @@
  */
 package views;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import models.entities.Categoria;
+import services.CategoriaService;
+import services.impl.CategoriaServiceImpl;
+
 /**
  *
  * @author ELIAS
@@ -15,7 +21,42 @@ public class frmCategoria extends javax.swing.JInternalFrame {
      */
     public frmCategoria() {
         initComponents();
+        
+        ListarCategorias();
     }
+    
+    
+    private void ListarCategorias(){
+        
+         DefaultTableModel dtm = (DefaultTableModel) tblcat.getModel();
+         CategoriaService categoriaService = new CategoriaServiceImpl();
+        List<Categoria> categorias = categoriaService.listar();
+        
+         for (Integer count = 0; count < categorias.size(); count++){
+             
+             dtm.addRow(new Object[]{
+                categorias.get(count).getCategoria_id(),
+                categorias.get(count).getCategoria_categoriaid(),
+                categorias.get(count).getCategoria_nombre()
+               
+            });
+             
+         }
+    }
+    
+    private void EstadoBotones(boolean estado){
+        
+    cmdnuevo.setEnabled(estado);
+    cmdcancelar.setEnabled(!estado);
+    cmdguardar.setEnabled(!estado);
+    cmdeditar.setEnabled(estado);
+    cmdsalir.setEnabled(estado);
+
+    txtnombre.setEditable(!estado);
+        
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,47 +68,165 @@ public class frmCategoria extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblcat = new javax.swing.JTable();
+        jToolBar1 = new javax.swing.JToolBar();
+        cmdnuevo = new javax.swing.JButton();
+        cmdguardar = new javax.swing.JButton();
+        cmdcancelar = new javax.swing.JButton();
+        cmdeditar = new javax.swing.JButton();
+        cmdsalir = new javax.swing.JButton();
+        txtnombre = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
+        setIconifiable(true);
         setTitle("Categorias");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblcat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "CATEGORIA_ID", "CATEGORIA_CAT_ID", "NOMBRE"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblcat);
+
+        jToolBar1.setRollover(true);
+
+        cmdnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/page_add.png"))); // NOI18N
+        cmdnuevo.setText("Nuevo");
+        cmdnuevo.setFocusable(false);
+        cmdnuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cmdnuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        cmdnuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdnuevoActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(cmdnuevo);
+
+        cmdguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/disk_save.png"))); // NOI18N
+        cmdguardar.setText("Guardar");
+        cmdguardar.setEnabled(false);
+        cmdguardar.setFocusable(false);
+        cmdguardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cmdguardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        cmdguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdguardarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(cmdguardar);
+
+        cmdcancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Cancel (2).png"))); // NOI18N
+        cmdcancelar.setText("Cancelar");
+        cmdcancelar.setEnabled(false);
+        cmdcancelar.setFocusable(false);
+        cmdcancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cmdcancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        cmdcancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdcancelarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(cmdcancelar);
+
+        cmdeditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/page_edit.png"))); // NOI18N
+        cmdeditar.setText("Editar");
+        cmdeditar.setFocusable(false);
+        cmdeditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cmdeditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        cmdeditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdeditarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(cmdeditar);
+
+        cmdsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/door_in.png"))); // NOI18N
+        cmdsalir.setText("Salir");
+        cmdsalir.setFocusable(false);
+        cmdsalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cmdsalir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        cmdsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdsalirActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(cmdsalir);
+
+        jLabel1.setText("Nombre de la categoria");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtnombre))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(234, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cmdnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdnuevoActionPerformed
+        // TODO add your handling code here:
+     EstadoBotones(false);
+    }//GEN-LAST:event_cmdnuevoActionPerformed
+
+    private void cmdguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdguardarActionPerformed
+        // TODO add your handling code here:
+         EstadoBotones(true);
+       
+     
+    }//GEN-LAST:event_cmdguardarActionPerformed
+
+    private void cmdcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdcancelarActionPerformed
+        // TODO add your handling code here:
+      EstadoBotones(true);
+    }//GEN-LAST:event_cmdcancelarActionPerformed
+
+    private void cmdeditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdeditarActionPerformed
+        // TODO add your handling code here:
+         EstadoBotones(false);
+
+    }//GEN-LAST:event_cmdeditarActionPerformed
+
+    private void cmdsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdsalirActionPerformed
+     this.dispose();
+    }//GEN-LAST:event_cmdsalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdcancelar;
+    private javax.swing.JButton cmdeditar;
+    private javax.swing.JButton cmdguardar;
+    private javax.swing.JButton cmdnuevo;
+    private javax.swing.JButton cmdsalir;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JTable tblcat;
+    private javax.swing.JTextField txtnombre;
     // End of variables declaration//GEN-END:variables
 }

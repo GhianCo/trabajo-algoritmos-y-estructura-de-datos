@@ -52,6 +52,7 @@ public class ProductoDaoDatabase implements ProductoDao {
             connection.close();
         } catch (SQLException ex) {
             try {
+                System.out.println(ex.getMessage());
                 resultSet.close();
                 callableStatement.close();
                 connection.close();

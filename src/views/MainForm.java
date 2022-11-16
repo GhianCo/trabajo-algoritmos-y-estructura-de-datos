@@ -2,8 +2,14 @@ package views;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 public class MainForm extends javax.swing.JFrame {
 
@@ -48,6 +54,8 @@ public class MainForm extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,6 +131,18 @@ public class MainForm extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu5);
 
+        jMenu6.setText("Mantenimiento");
+
+        jMenuItem3.setText("Categorias");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu6);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -139,10 +159,26 @@ public class MainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void CentrarVentanaHija(JInternalFrame internalFrame){
+    
+    
+    int x= (mainDesktop.getWidth()/2)-internalFrame.getWidth()/2;
+    int y=(mainDesktop.getHeight()/2)-internalFrame.getHeight()/2;
+
+    mainDesktop.add(internalFrame);
+    internalFrame.toFront();       
+    internalFrame.setVisible(true);
+   internalFrame.setLocation(x, y);
+
+}
+    
+    
     private void optProductListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optProductListActionPerformed
         ProductList productList = new ProductList();
-        mainDesktop.add(productList);
-        productList.show();
+        
+          CentrarVentanaHija(productList);
+        
+      
     }//GEN-LAST:event_optProductListActionPerformed
 
     private void optProductColaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optProductColaActionPerformed
@@ -183,6 +219,14 @@ public class MainForm extends javax.swing.JFrame {
         lista.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        
+        
+             frmCategoria cat=new frmCategoria();
+              CentrarVentanaHija(cat);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -213,6 +257,8 @@ public class MainForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
+                
                 new MainForm().setVisible(true);
             }
         });
@@ -224,9 +270,11 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JDesktopPane mainDesktop;
     private javax.swing.JMenuItem optProductCola;
     private javax.swing.JMenuItem optProductList;

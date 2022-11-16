@@ -109,6 +109,7 @@ public class CategoriaDaoDatabase implements CategoriaDao {
             connection.close();
         } catch (SQLException ex) {
             try {
+                System.out.println(ex.getMessage());
                 resultSet.close();
                 callableStatement.close();
                 connection.close();
