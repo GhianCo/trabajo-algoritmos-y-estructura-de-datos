@@ -72,6 +72,9 @@
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblcatMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -157,6 +160,9 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="txtnombre">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

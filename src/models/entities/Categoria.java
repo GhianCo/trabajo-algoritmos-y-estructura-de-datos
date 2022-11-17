@@ -49,6 +49,9 @@ public class Categoria {
         this.categoria_nombre = categoria_nombre;
     }
     
-    
+    @Override
+    public String toString(){
+        return this.getCategoria_nombre();
+    }
     
 }

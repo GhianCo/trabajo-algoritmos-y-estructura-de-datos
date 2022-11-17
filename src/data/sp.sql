@@ -25,6 +25,22 @@ create procedure sp_insert_Categoria(in categoria_categoriaid int,in categoria_n
 	insert into categoria(categoria_categoriaid,categoria_nombre ) values (categoria_categoriaid,categoria_nombre);
 
 create procedure sp_update_Categoria(in categoria_id int, in categoria_categoriaid int,in categoria_nombre varchar(45))
-	update categoria set categoria_categoriaid=categoria_categoriaid,categoria_nombre=categoria_nombre where categoria_categoriaid=categoria_id;
+	update categoria set categoria_categoriaid=categoria_categoriaid,categoria_nombre=categoria_nombre where categoria_id=pcategoria_id;
 
 /*FIN CATEGORIA*/
+
+/* PRODUCTO */
+
+create procedure sp_find_Producto(in producto_id int)
+	select p.producto_id, p.producto_nombre, c.categoria_nombre, p.producto_costo, p.producto_precio, p.producto_cantvendida from producto p, categoria c where c.categoria_id = p.categoria_id and p.producto_id=producto_id;
+
+create procedure sp_find_Producto(in producto_id int)
+	select p.producto_id, p.producto_nombre, c.categoria_nombre, p.producto_costo, p.producto_precio, p.producto_cantvendida from producto p, categoria c where c.categoria_id = p.categoria_id and p.producto_id=producto_id;
+
+create procedure sp_insert_Producto(in producto_id int,in producto_nombre varchar(45),producto_costo decimal(10,2), producto_precio decimal(10,2))
+	insert into producto(categoria_id,producto_nombre,producto_costo,producto_precio ) values (producto_id,producto_nombre,producto_costo,producto_precio);
+
+create procedure sp_update_Producto(in producto_id int, in categoria_id int,in producto_nombre varchar(45),producto_costo decimal(10,2), producto_precio decimal(10,2))
+	update producto p set p.producto_nombre=producto_nombre,p.producto_costo=producto_costo,p.producto_precio=producto_precio where p.producto_id=producto_id;
+    
+/*FIN PRODUCTO*/

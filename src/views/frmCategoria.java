@@ -16,30 +16,36 @@ import services.impl.CategoriaServiceImpl;
  * @author ELIAS
  */
 public class frmCategoria extends javax.swing.JInternalFrame {
-
+    
+    //1 insert , 2 update
+   private short accion=0;
     /**
      * Creates new form frmCategoria
      */
     public frmCategoria() {
         initComponents();
-        
         ListarCategorias();
     }
     
     
     private void ListarCategorias(){
+          DefaultTableModel dtm = (DefaultTableModel) tblcat.getModel();
+        //si esta llena la tabla se borra
+        if (tblcat.getRowCount()>0) {
+            
+                for (int i = tblcat.getRowCount() - 1; i >= 0; i--) {
+                dtm.removeRow(i);
+             }
+            
+        }
         
-         DefaultTableModel dtm = (DefaultTableModel) tblcat.getModel();
-         CategoriaService categoriaService = new CategoriaServiceImpl();
+        CategoriaService categoriaService = new CategoriaServiceImpl();
         List<Categoria> categorias = categoriaService.listar();
-        
          for (Integer count = 0; count < categorias.size(); count++){
-             
              dtm.addRow(new Object[]{
                 categorias.get(count).getCategoria_id(),
                 categorias.get(count).getCategoria_categoriaid(),
                 categorias.get(count).getCategoria_nombre()
-               
             });
              
          }
@@ -52,8 +58,8 @@ public class frmCategoria extends javax.swing.JInternalFrame {
     cmdguardar.setEnabled(!estado);
     cmdeditar.setEnabled(estado);
     cmdsalir.setEnabled(estado);
-
     txtnombre.setEditable(!estado);
+    tblcat.setEnabled(estado);
         
     }
     
@@ -91,6 +97,11 @@ public class frmCategoria extends javax.swing.JInternalFrame {
                 "CATEGORIA_ID", "CATEGORIA_CAT_ID", "NOMBRE"
             }
         ));
+        tblcat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblcatMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblcat);
 
         jToolBar1.setRollover(true);
@@ -157,6 +168,8 @@ public class frmCategoria extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(cmdsalir);
 
+        txtnombre.setEditable(false);
+
         jLabel1.setText("Nombre de la categoria");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -192,35 +205,52 @@ public class frmCategoria extends javax.swing.JInternalFrame {
 
     private void cmdnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdnuevoActionPerformed
         // TODO add your handling code here:
-     EstadoBotones(false);
+       //1 insert , 2 update
+        accion=1;
+        txtnombre.setText("");
+        EstadoBotones(false);
     }//GEN-LAST:event_cmdnuevoActionPerformed
 
     private void cmdguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdguardarActionPerformed
         // TODO add your handling code here:
+        //accion: 1 insert, 2 update
+        if (accion==1) {
+            if (txtnombre.getText().length() > 0) {
+                EstadoBotones(true);
+                Categoria categoria=new Categoria();
+                categoria.setCategoria_nombre(txtnombre.getText());
+                CategoriaService categoriaService = new CategoriaServiceImpl();
+                categoriaService.crear(categoria);
+                JOptionPane.showMessageDialog(rootPane, "Se registro correctamente", "Registro de categoria", JOptionPane.INFORMATION_MESSAGE, frameIcon);
+                txtnombre.setText("");
+                ListarCategorias();
+
+            }else{
+
+                JOptionPane.showMessageDialog(rootPane, "Ingrese un nombre para la categoria", "Registro de categoria", JOptionPane.ERROR_MESSAGE, frameIcon);
+
+            }
         
-        if (txtnombre.getText().length() > 0) {
+        } else if(accion==2){
             
+            int fila=tblcat.getSelectedRow();
+            if (txtnombre.getText().length() > 0) {
+                EstadoBotones(true);
+                Categoria categoria=new Categoria();
+                categoria.setCategoria_id( Integer.parseInt( tblcat.getValueAt(fila,0).toString()));
+                categoria.setCategoria_nombre(txtnombre.getText());
+                CategoriaService categoriaService = new CategoriaServiceImpl();
+                categoriaService.update(categoria);
+                JOptionPane.showMessageDialog(rootPane, "Registro actualizado correctamente", "Registro de categoria", JOptionPane.INFORMATION_MESSAGE, frameIcon);
+                txtnombre.setText("");
+                ListarCategorias();
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Ingrese un nombre para la categoria", "Registro de categoria", JOptionPane.ERROR_MESSAGE, frameIcon);
+            }
             
-         EstadoBotones(true);
-       
-         Categoria categoria=new Categoria();
-         
-         categoria.setCategoria_nombre(txtnombre.getText());
-         
-         CategoriaService categoriaService = new CategoriaServiceImpl();
-         categoriaService.crear(categoria);
-         
-             JOptionPane.showMessageDialog(rootPane, "Se registro correctamente", "Registro de categoria", HEIGHT, frameIcon);
-             txtnombre.setText("");
-             ListarCategorias();
-         
-        }else{
-                        
-            JOptionPane.showMessageDialog(rootPane, "Ingrese un nombre para la categoria", "Registro de categoria", HEIGHT, frameIcon);
-       
         }
         
-        
+     
          
      
     }//GEN-LAST:event_cmdguardarActionPerformed
@@ -232,13 +262,26 @@ public class frmCategoria extends javax.swing.JInternalFrame {
 
     private void cmdeditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdeditarActionPerformed
         // TODO add your handling code here:
+        //accion: 1 insert , 2 update
+          accion=2;
          EstadoBotones(false);
+       
 
     }//GEN-LAST:event_cmdeditarActionPerformed
 
     private void cmdsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdsalirActionPerformed
      this.dispose();
     }//GEN-LAST:event_cmdsalirActionPerformed
+
+    private void tblcatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblcatMouseClicked
+        // TODO add your handling code here:
+          
+         int fila=tblcat.getSelectedRow();
+         
+        String categoria= tblcat.getValueAt(fila,2).toString();
+        txtnombre.setText(categoria);
+        
+    }//GEN-LAST:event_tblcatMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

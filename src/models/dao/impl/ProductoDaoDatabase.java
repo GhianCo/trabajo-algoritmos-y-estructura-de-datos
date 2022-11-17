@@ -18,12 +18,67 @@ public class ProductoDaoDatabase implements ProductoDao {
 
     @Override
     public void create(Producto producto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+       try {
+            connection = DBConn.getConnection();
+            connection.setAutoCommit(false);
+            callableStatement = connection.prepareCall("{CALL sp_insert_Producto(?,?,?,?)}");
+
+            callableStatement.setInt(1, producto.getCategoria_id());
+            callableStatement.setString(2,producto.getProducto_nombre() );
+            callableStatement.setDouble(3,producto.getProducto_costo() );
+            callableStatement.setDouble(4,producto.getProducto_precio() );
+          
+            callableStatement.executeUpdate();
+            connection.commit();
+            callableStatement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            try {
+                connection.rollback();
+                callableStatement.close();
+                connection.close();
+            } catch (SQLException exp) {
+                System.out.println(exp.getMessage());
+            }
+        }
+          
+        
     }
 
     @Override
     public Producto find(Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         Producto producto = null;
+
+        try {
+            connection = DBConn.getConnection();
+            callableStatement = connection.prepareCall("{CALL sp_find_Producto(?)}");
+            callableStatement.setString(1, id.toString());
+            resultSet = callableStatement.executeQuery();
+
+            if (resultSet.next()) {
+                producto.setProducto_id(resultSet.getInt(1));
+                producto.setProducto_nombre(resultSet.getString(2));
+                producto.setCategoria_nombre(resultSet.getString(3));
+                producto.setProducto_costo(resultSet.getInt(4));
+                producto.setProducto_precio(resultSet.getInt(5));
+                producto.setProducto_cantvendida(resultSet.getInt(6));
+            }
+
+            resultSet.close();
+            callableStatement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            try {
+                resultSet.close();
+                callableStatement.close();
+                connection.close();
+            } catch (SQLException exp) {
+                System.out.println(exp.getMessage());
+            }
+        }
+
+        return producto;
     }
 
     @Override
@@ -66,7 +121,31 @@ public class ProductoDaoDatabase implements ProductoDao {
 
     @Override
     public void update(Producto producto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+           try {
+            connection = DBConn.getConnection();
+            callableStatement = connection.prepareCall("{CALL sp_update_Producto(?,?,?,?,?)}");
+
+            callableStatement.setInt(1, producto.getProducto_id());
+            callableStatement.setInt(2, producto.getCategoria_id());
+            callableStatement.setString(3, producto.getProducto_nombre());
+            callableStatement.setDouble(4, producto.getProducto_costo());
+            callableStatement.setDouble(5, producto.getProducto_precio());
+            
+
+            callableStatement.executeUpdate();
+            callableStatement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            try {
+                callableStatement.close();
+                connection.close();
+            } catch (SQLException exp) {
+                System.out.println(exp.getMessage());
+            }
+        }
+        
+
     }
 
     @Override
