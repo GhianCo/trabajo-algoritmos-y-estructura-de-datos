@@ -22,7 +22,7 @@ public class ClienteDaoDatabase implements ClienteDao {
         try {
             connection = DBConn.getConnection();
             connection.setAutoCommit(false);
-            callableStatement = connection.prepareCall("{CALL sp_insert_Cliente(?,?,?,?,?,?)}");
+            callableStatement = connection.prepareCall("{CALL sp_insert_Cliente(?,?,?,?,?,?,?)}");
 
             callableStatement.setInt(1, cliente.getMembresia_id());
             callableStatement.setString(2, cliente.getCliente_orden());
@@ -30,6 +30,7 @@ public class ClienteDaoDatabase implements ClienteDao {
             callableStatement.setString(4, cliente.getCliente_apellidos());
             callableStatement.setString(5, cliente.getCliente_edad());
             callableStatement.setString(6, cliente.getCliente_telefono());
+             callableStatement.setString(7, cliente.getDni());
 
             callableStatement.executeUpdate();
             connection.commit();
@@ -95,11 +96,13 @@ public class ClienteDaoDatabase implements ClienteDao {
             while (resultSet.next()) {
                 cliente = new Cliente();
                 cliente.setCliente_id(resultSet.getInt(1));
-                cliente.setCliente_nombres(resultSet.getString(2));
-                cliente.setCliente_apellidos(resultSet.getString(3));
-                cliente.setMembresia_nombre(resultSet.getString(4));
-                cliente.setCliente_edad(resultSet.getString(5));
-                cliente.setCliente_telefono(resultSet.getString(6));
+                 cliente.setDni(resultSet.getString(2));
+                cliente.setCliente_nombres(resultSet.getString(3));
+                cliente.setCliente_apellidos(resultSet.getString(4));
+                cliente.setMembresia_nombre(resultSet.getString(5));
+                cliente.setCliente_edad(resultSet.getString(6));
+                cliente.setCliente_telefono(resultSet.getString(7));
+                
                 clientes.add(cliente);
             }
 
@@ -123,7 +126,7 @@ public class ClienteDaoDatabase implements ClienteDao {
     public void update(Cliente cliente) {
         try {
             connection = DBConn.getConnection();
-            callableStatement = connection.prepareCall("{CALL sp_update_Cliente(?,?,?,?,?,?,?)}");
+            callableStatement = connection.prepareCall("{CALL sp_update_Cliente(?,?,?,?,?,?,?,?)}");
 
             callableStatement.setInt(1, cliente.getCliente_id());
             callableStatement.setInt(2, cliente.getMembresia_id());
@@ -132,6 +135,7 @@ public class ClienteDaoDatabase implements ClienteDao {
             callableStatement.setString(5, cliente.getCliente_apellidos());
             callableStatement.setString(6, cliente.getCliente_edad());
             callableStatement.setString(7, cliente.getCliente_telefono());
+             callableStatement.setString(8, cliente.getDni());
 
             callableStatement.executeUpdate();
             callableStatement.close();
@@ -165,6 +169,45 @@ public class ClienteDaoDatabase implements ClienteDao {
                 System.out.println(exp.getMessage());
             }
         }
+    }
+    
+       
+    public List<Cliente>  find_Cliente_Criterio(Object dni,Object nombre, Object criterio ) {
+        Cliente cliente = null;
+        List<Cliente> clientes = new ArrayList<>();
+
+        try {
+            connection = DBConn.getConnection();
+            callableStatement = connection.prepareCall("{CALL sp_find_Cliente_Criterio(?,?,?)}");
+            callableStatement.setString(1, dni.toString());
+            callableStatement.setString(2, nombre.toString());
+            callableStatement.setString(3, criterio.toString());
+            resultSet = callableStatement.executeQuery();
+
+             while (resultSet.next())  {
+                cliente = new Cliente();
+                cliente.setCliente_id(resultSet.getInt(1));
+                cliente.setCliente_nombres(resultSet.getString(4));
+                cliente.setCliente_apellidos(resultSet.getString(5));
+                cliente.setDni(resultSet.getString(8));
+              
+                 clientes.add(cliente);
+            }
+
+            resultSet.close();
+            callableStatement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            try {
+                resultSet.close();
+                callableStatement.close();
+                connection.close();
+            } catch (SQLException exp) {
+                System.out.println(exp.getMessage());
+            }
+        }
+
+        return clientes;
     }
 
 }

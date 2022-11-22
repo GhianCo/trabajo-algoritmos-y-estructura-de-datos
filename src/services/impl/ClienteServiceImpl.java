@@ -39,5 +39,9 @@ public class ClienteServiceImpl implements ClienteService {
     public void borrar(Object id) {
         clienteDao.delete(id);
     }
+        @Override
+   public  List<Cliente> find_Cliente_Criterio(Object dni,Object nombre, Object criterio ){
+      return clienteDao.find_Cliente_Criterio(dni, nombre, criterio);
+   }
 
 }

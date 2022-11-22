@@ -126,6 +126,11 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/clientes.png"))); // NOI18N
         jMenuItem5.setText("Clientes");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem5);
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/group_key.png"))); // NOI18N
@@ -187,7 +192,7 @@ public class MainForm extends javax.swing.JFrame {
     mainDesktop.add(internalFrame);
     internalFrame.toFront();       
     internalFrame.setVisible(true);
-   internalFrame.setLocation(x, y);
+    internalFrame.setLocation(x, y);
 
 }
     
@@ -215,7 +220,8 @@ public class MainForm extends javax.swing.JFrame {
 //             pedido.setVisible(true);
 
         frmListaPedidos lista =new frmListaPedidos();
-        lista.setVisible(true);
+        CentrarVentanaHija(lista);
+       
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -238,6 +244,12 @@ public class MainForm extends javax.swing.JFrame {
          ColaProductList colaProductList = new ColaProductList();
          CentrarVentanaHija(colaProductList);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+          frmRegistroClientes clientes=new frmRegistroClientes();
+              CentrarVentanaHija(clientes);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments

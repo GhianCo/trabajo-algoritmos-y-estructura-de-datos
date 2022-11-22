@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
+import models.entities.Cliente;
 import utils.DBConn;
 /**
  *
@@ -152,5 +153,12 @@ public class CategoriaDaoDatabase implements CategoriaDao {
     public void delete(Object id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public List<Categoria> find_Cliente_Criterio(Object dni, Object nombre, Object criterio) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    
     
 }

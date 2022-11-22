@@ -41,8 +41,8 @@ public class PedidoConProductoDaoDatabase implements PedidoConProductoDao {
                 pedidoConProducto.setPedido_fecha(resultSet.getString(1));
                 pedidoConProducto.setPedido_orden(resultSet.getString(2));
                 pedidoConProducto.setCliente(resultSet.getString(3));
-                pedidoConProducto.setProducto_nombre(resultSet.getString(4));
-                pedidoConProducto.setProducto_precio(resultSet.getString(5));
+//                pedidoConProducto.setProducto_nombre(resultSet.getString(4));
+                pedidoConProducto.setProducto_precio(resultSet.getString(4));
 
                 pedidosConProductos.add(pedidoConProducto);
             }
@@ -70,6 +70,11 @@ public class PedidoConProductoDaoDatabase implements PedidoConProductoDao {
 
     @Override
     public void delete(Object id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<PedidoConProducto> find_Cliente_Criterio(Object dni, Object nombre, Object criterio) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
