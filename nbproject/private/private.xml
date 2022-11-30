@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/ELIAS/Documents/github/algoritmos/trabajo-algoritmos-y-estructura-de-datos/src/views/frmRegistroClientes.java</file>
-            <file>file:/C:/Users/ELIAS/Documents/github/algoritmos/trabajo-algoritmos-y-estructura-de-datos/src/models/dao/EntityDao.java</file>
-            <file>file:/C:/Users/ELIAS/Documents/github/algoritmos/trabajo-algoritmos-y-estructura-de-datos/src/data/sp.sql</file>
-            <file>file:/C:/Users/ELIAS/Documents/github/algoritmos/trabajo-algoritmos-y-estructura-de-datos/src/services/ClienteService.java</file>
-            <file>file:/C:/Users/ELIAS/Documents/github/algoritmos/trabajo-algoritmos-y-estructura-de-datos/src/views/MainForm.java</file>
-            <file>file:/C:/Users/ELIAS/Documents/github/algoritmos/trabajo-algoritmos-y-estructura-de-datos/src/views/ProductList.java</file>
-            <file>file:/C:/Users/ELIAS/Documents/github/algoritmos/trabajo-algoritmos-y-estructura-de-datos/src/models/entities/Cliente.java</file>
-            <file>file:/C:/Users/ELIAS/Documents/github/algoritmos/trabajo-algoritmos-y-estructura-de-datos/src/services/impl/ClienteServiceImpl.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

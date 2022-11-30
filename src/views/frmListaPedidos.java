@@ -4,15 +4,21 @@ import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Toolkit;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.entities.DetalleCliente;
 import models.entities.Pedido;
 import models.entities.PedidoConProducto;
 import services.impl.PedidoConProductoServiceImpl;
+import utils.DBConn;
 
 public class frmListaPedidos extends javax.swing.JInternalFrame {
 
@@ -78,6 +84,7 @@ public class frmListaPedidos extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         btn2 = new javax.swing.JButton();
         btn1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -138,6 +145,18 @@ public class frmListaPedidos extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(jButton6);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/page_find.png"))); // NOI18N
+        jButton1.setText("Ver Detalle");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
 
         btn2.setText("Ordenar aplicando prioridad");
         btn2.addActionListener(new java.awt.event.ActionListener() {
@@ -296,6 +315,11 @@ public class frmListaPedidos extends javax.swing.JInternalFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        VerDetalle();
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void LimpiarTabla() {
         //se limpia la tabla para volver a llenar con la lista ordenada
 
@@ -305,6 +329,61 @@ public class frmListaPedidos extends javax.swing.JInternalFrame {
             dtm.removeRow(i);
         }
         //lblitems.setText(String.valueOf(tblProductos.getRowCount()));
+    }
+    
+    private void VerDetalle(){
+        
+         HashMap<Integer,DetalleCliente> map= new  HashMap<Integer,DetalleCliente>();
+          Connection connection = DBConn.getConnection();
+          ResultSet resultSet;
+          
+          
+        Frame frame=JOptionPane.getFrameForComponent(this);
+        frmDetallePedido detallepedido=new frmDetallePedido(frame,true);
+       
+         DefaultTableModel dtm = (DefaultTableModel) detallepedido.tbldetalle.getModel();
+          int idpedido=0;
+          int fila=jpedidos.getSelectedRow();
+         
+          idpedido= Integer.parseInt(jpedidos.getValueAt(fila,1).toString()) ;
+          DetalleCliente detalle;
+          
+        try {
+             CallableStatement callableStatement = connection.prepareCall("{CALL sp_find_Detallepedido(?)}");
+             callableStatement.setInt(1,idpedido);
+             resultSet = callableStatement.executeQuery();
+              while (resultSet.next()) {
+                  int producto_id=resultSet.getInt(1);
+                  String producto=resultSet.getString(2);
+                  int cantidad=resultSet.getInt(3);
+                  double precio=resultSet.getDouble(4);
+                  
+                  detalle =new DetalleCliente(producto_id,producto,cantidad,precio);
+                  map.put(producto_id, detalle);
+              }
+              
+              for(int i : map.keySet()){
+                  
+                  DetalleCliente det=map.get(i);
+                                     
+                    dtm.addRow(new Object[]{
+                    det.getProducto_id(),
+                    det.getProducto(),
+                    det.getCantidad(),
+                    det.getPrecio()
+            });
+             
+              }
+          
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        
+        
+      
+        detallepedido.setLocationRelativeTo(this);
+        detallepedido.setVisible(true);
+        
     }
 
     /**
@@ -346,6 +425,7 @@ public class frmListaPedidos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn1;
     private javax.swing.JButton btn2;
     private com.toedter.calendar.JDateChooser dtfecha;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
