@@ -4,6 +4,7 @@ import models.dao.CategoriaDao;
 import models.dao.ClienteDao;
 import models.dao.PedidoConProductoDao;
 import models.dao.ProductoDao;
+import models.dao.UsuarioDao;
 
 public class DaoFactory {
 
@@ -33,5 +34,8 @@ public class DaoFactory {
     
     public CategoriaDao getCategoriaDao() {
         return new CategoriaDaoDatabase();
+    }
+    public UsuarioDao getUsuarioDao() {
+        return new UsuarioDaoDatabase();
     }
 }

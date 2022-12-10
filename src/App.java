@@ -5,6 +5,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import views.MainForm;
+import views.frmLogin;
 
 public class App {
 
@@ -17,8 +18,12 @@ public class App {
                 }
         
         
-        MainForm productos = new MainForm();
-        productos.setVisible(true);
+//        MainForm productos = new MainForm();
+//       frmLogin
+
+        frmLogin login=new  frmLogin();
+         login.setVisible(true);
+        
     }
 
 }

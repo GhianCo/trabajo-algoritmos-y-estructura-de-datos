@@ -10,5 +10,6 @@ public interface EntityDao<T> {
     
     public void update(T entity);
     public void delete(Object id);
-     public List<T>  find_Cliente_Criterio(Object dni,Object nombre, Object criterio );
+    public List<T>  find_Cliente_Criterio(Object dni,Object nombre, Object criterio );
+    public  T Login(T entity);
 }

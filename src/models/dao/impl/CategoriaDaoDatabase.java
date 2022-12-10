@@ -158,6 +158,11 @@ public class CategoriaDaoDatabase implements CategoriaDao {
     public List<Categoria> find_Cliente_Criterio(Object dni, Object nombre, Object criterio) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public Categoria Login(Categoria entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
     

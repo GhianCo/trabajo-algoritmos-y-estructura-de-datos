@@ -135,6 +135,11 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/group_key.png"))); // NOI18N
         jMenuItem6.setText("Usuarios");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem6);
 
         jMenuBar1.add(jMenu6);
@@ -250,6 +255,13 @@ public class MainForm extends javax.swing.JFrame {
           frmRegistroClientes clientes=new frmRegistroClientes();
               CentrarVentanaHija(clientes);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        
+          frmUsuarios usuarios=new frmUsuarios();
+              CentrarVentanaHija(usuarios);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments

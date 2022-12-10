@@ -210,4 +210,9 @@ public class ClienteDaoDatabase implements ClienteDao {
         return clientes;
     }
 
+    @Override
+    public Cliente Login(Cliente entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
