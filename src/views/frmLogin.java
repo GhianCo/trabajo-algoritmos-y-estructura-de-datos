@@ -149,8 +149,7 @@ public class frmLogin extends javax.swing.JFrame {
         usuario.setContraseña(String.valueOf(txtclave.getPassword()));
         
         UsuarioServiceImpl  usuarioservice= new UsuarioServiceImpl();
-        Usuario usuario_login=new Usuario();
-        usuario_login=usuarioservice.Login(usuario);
+        Usuario usuario_login = usuarioservice.Login(usuario);
         
         if (usuario_login.getNombre() !=null) {
             JOptionPane.showMessageDialog(rootPane, "Bienvenido usuario: "+usuario_login.getNombre(), "Acceso", JOptionPane.INFORMATION_MESSAGE);
@@ -161,7 +160,6 @@ public class frmLogin extends javax.swing.JFrame {
             
         }else {
              JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto", "Acceso", JOptionPane.INFORMATION_MESSAGE);
-             System.exit(0);
         }
             
     }//GEN-LAST:event_jButton1ActionPerformed
