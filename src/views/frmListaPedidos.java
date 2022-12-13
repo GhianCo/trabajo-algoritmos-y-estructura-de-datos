@@ -29,7 +29,7 @@ public class frmListaPedidos extends javax.swing.JInternalFrame {
         initComponents();
         dtfecha.setDateFormatString("dd/MM/yyyy");
         
-         JTextFieldDateEditor editor = (JTextFieldDateEditor) dtfecha.getDateEditor();
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) dtfecha.getDateEditor();
         editor.setEditable(false);
         
          Date fecha = new Date();
