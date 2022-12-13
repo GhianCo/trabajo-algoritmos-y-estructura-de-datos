@@ -17,7 +17,8 @@ import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JRViewer;
+import net.sf.jasperreports.swing.JRViewer;
+
 import utils.DBConn;
 
 /**
@@ -203,7 +204,7 @@ public class frmReporte extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-    private void VenatanaReporte(  JasperPrint print){
+    private void VenatanaReporte(JasperPrint print){
  
         try {
             

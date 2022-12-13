@@ -144,7 +144,7 @@ public class frmLogin extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
     
      Usuario usuario_login=new Usuario();
        
@@ -174,8 +174,8 @@ public class frmLogin extends javax.swing.JFrame {
         if (intentos==3) {
               JOptionPane.showMessageDialog(rootPane, "intentos permitidos superados", "Acceso", JOptionPane.ERROR_MESSAGE);
               System.exit(0);
+
         }
-       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

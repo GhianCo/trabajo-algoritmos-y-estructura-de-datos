@@ -5,16 +5,20 @@ import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.entities.ArbolClientes;
 import models.entities.Cliente;
 import models.entities.Cliente.membresia;
 import services.ClienteService;
 import services.impl.ClienteServiceImpl;
 
 public class frmRegistroClientes extends javax.swing.JInternalFrame {
-      List<Cliente> clientes ;
-      int accion=0;
-    
- DefaultTableModel dtm = new DefaultTableModel();
+
+    List<Cliente> clientes;
+    int accion = 0;
+
+    DefaultTableModel dtm = new DefaultTableModel();
+    ArbolClientes arbolClientes = new ArbolClientes();
+
     /**
      * Creates new form frmRegistroClientes
      */
@@ -54,42 +58,38 @@ public class frmRegistroClientes extends javax.swing.JInternalFrame {
 ////        }
 //
 //    }
-     
-       private void CargarClientes() {
-        
+    private void CargarClientes() {
+
         //si esta lleno limpia la tabla
-        
-         if (tblclientes.getRowCount()>0) {
-            
-                for (int i = tblclientes.getRowCount() - 1; i >= 0; i--) {
+        if (tblclientes.getRowCount() > 0) {
+
+            for (int i = tblclientes.getRowCount() - 1; i >= 0; i--) {
                 dtm.removeRow(i);
-             }
-            
+            }
+
         }
-        
-        String[] headers = new String[]{"ID","dni","NOMBRE", "APELLIDOS", "MEMBRESIA", "EDAD", "TELEFONO"};
+
+        String[] headers = new String[]{"ID", "dni", "NOMBRE", "APELLIDOS", "MEMBRESIA", "EDAD", "TELEFONO"};
         dtm.setColumnIdentifiers(headers);
         tblclientes.setModel(dtm);
-      
 
         ClienteService clienteservice = new ClienteServiceImpl();
         clientes = clienteservice.listar();
 
         for (Integer count = 0; count < clientes.size(); count++) {
+            arbolClientes.insertar(clientes.get(count));
             dtm.addRow(new Object[]{
-                 clientes.get(count).getCliente_id(),
+                clientes.get(count).getCliente_id(),
                 clientes.get(count).getDni(),
-                 clientes.get(count).getCliente_nombres(),
+                clientes.get(count).getCliente_nombres(),
                 clientes.get(count).getCliente_apellidos(),
                 clientes.get(count).getMembresia_nombre(),
                 clientes.get(count).getCliente_edad(),
-                clientes.get(count).getCliente_telefono(),
-                
-            });
+                clientes.get(count).getCliente_telefono(),});
         }
-    } 
 
-    
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -377,113 +377,121 @@ public class frmRegistroClientes extends javax.swing.JInternalFrame {
 
         //accion: 1 insert , 2 uupdate
         Limpiar();
-        accion=1;
+        accion = 1;
         EstadoBotones(false);
 
     }//GEN-LAST:event_cmdnuevoActionPerformed
 
-     private void Limpiar(){
-         
+    private void Limpiar() {
+
         txtnombre.setText("");
         txtapellido.setText("");
         txtedad.setText("");
         txtfono.setText("");
         txtdni.setText("");
         cmbmembresia.setSelectedIndex(0);
-        
+
     }
-     
-    private void EstadoBotones(boolean estado){
-        
-    cmdnuevo.setEnabled(estado);
-    cmdcancelar.setEnabled(!estado);
-    cmdguardar.setEnabled(!estado);
-    cmdeditar.setEnabled(estado);
-    cmdsalir.setEnabled(estado);
+
+    private void EstadoBotones(boolean estado) {
+
+        cmdnuevo.setEnabled(estado);
+        cmdcancelar.setEnabled(!estado);
+        cmdguardar.setEnabled(!estado);
+        cmdeditar.setEnabled(estado);
+        cmdsalir.setEnabled(estado);
 //    
-    txtnombre.setEnabled(!estado);
-    txtapellido.setEnabled(!estado);
-    txtedad.setEnabled(!estado);
-    txtfono.setEnabled(!estado);
-    txtdni.setEnabled(!estado);
-    
+        txtnombre.setEnabled(!estado);
+        txtapellido.setEnabled(!estado);
+        txtedad.setEnabled(!estado);
+        txtfono.setEnabled(!estado);
+        txtdni.setEnabled(!estado);
+
 //    txtCantidadVendida.setEnabled(!estado);
-    cmbmembresia.setEnabled(!estado);
-    tblclientes.setEnabled(estado);
-    txtbuscar.setEnabled(estado);
-    cmbbuscar.setEnabled(estado);
-    btnbuscar.setEnabled(estado);
-        
+        cmbmembresia.setEnabled(!estado);
+        tblclientes.setEnabled(estado);
+        txtbuscar.setEnabled(estado);
+        cmbbuscar.setEnabled(estado);
+        btnbuscar.setEnabled(estado);
+
     }
-     
+
     private void cmdguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdguardarActionPerformed
         // TODO add your handling code here:
         //accion: 1 insert , 2 update
-        if (accion==1) {
+        if (accion == 1) {
 
-              Cliente cliente=new Cliente();
-              cliente.setCliente_nombres(txtnombre.getText());
-              cliente.setDni(txtdni.getText());
-              cliente.setCliente_apellidos(txtapellido.getText());
-              cliente.setCliente_orden("0");
-              cliente.setCliente_edad(txtedad.getText());
-              cliente.setCliente_telefono(txtfono.getText());
-              
-              int idmembresia=0;
-              switch(cmbmembresia.getSelectedIndex()){
-                  case 0:idmembresia=4;
-                        break;
-                  case 1:idmembresia=3;
+            Cliente cliente = new Cliente();
+            cliente.setCliente_nombres(txtnombre.getText());
+            cliente.setDni(txtdni.getText());
+            cliente.setCliente_apellidos(txtapellido.getText());
+            cliente.setCliente_orden("0");
+            cliente.setCliente_edad(txtedad.getText());
+            cliente.setCliente_telefono(txtfono.getText());
+
+            int idmembresia = 0;
+            switch (cmbmembresia.getSelectedIndex()) {
+                case 0:
+                    idmembresia = 4;
                     break;
-                  case 2:idmembresia=2;
+                case 1:
+                    idmembresia = 3;
                     break;
-                  case 3:idmembresia=1;
+                case 2:
+                    idmembresia = 2;
                     break;
-                   
-              }
-              cliente.setMembresia_id(idmembresia);
-              ClienteService clienteservice=new ClienteServiceImpl();
-              clienteservice.crear(cliente);
-              JOptionPane.showMessageDialog(rootPane, "Se registro correctamente", "Registro de categoria", JOptionPane.INFORMATION_MESSAGE, frameIcon);
-              EstadoBotones(true);
-              Limpiar();
-              CargarClientes();
-              
+                case 3:
+                    idmembresia = 1;
+                    break;
+
+            }
+            cliente.setMembresia_id(idmembresia);
+            ClienteService clienteservice = new ClienteServiceImpl();
+            clienteservice.crear(cliente);
+            JOptionPane.showMessageDialog(rootPane, "Se registro correctamente", "Registro de categoria", JOptionPane.INFORMATION_MESSAGE, frameIcon);
+            EstadoBotones(true);
+            Limpiar();
+            CargarClientes();
+
 //
-        }else if (accion==2){
+        } else if (accion == 2) {
 //
-            int fila=tblclientes.getSelectedRow();
+            int fila = tblclientes.getSelectedRow();
 //          
-             Cliente cliente=new Cliente();
-             cliente.setCliente_id(Integer.parseInt( tblclientes.getValueAt(fila,0).toString()));
-             cliente.setCliente_nombres(txtnombre.getText());
-             cliente.setDni(txtdni.getText());
-             cliente.setCliente_apellidos(txtapellido.getText());
-             cliente.setCliente_orden("0");
-             cliente.setCliente_edad(txtedad.getText());
-             cliente.setCliente_telefono(txtfono.getText());
-               int idmembresia=0;
-              switch(cmbmembresia.getSelectedIndex()){
-                  case 0:idmembresia=4;
-                        break;
-                  case 1:idmembresia=3;
+            Cliente cliente = new Cliente();
+            cliente.setCliente_id(Integer.parseInt(tblclientes.getValueAt(fila, 0).toString()));
+            cliente.setCliente_nombres(txtnombre.getText());
+            cliente.setDni(txtdni.getText());
+            cliente.setCliente_apellidos(txtapellido.getText());
+            cliente.setCliente_orden("0");
+            cliente.setCliente_edad(txtedad.getText());
+            cliente.setCliente_telefono(txtfono.getText());
+            int idmembresia = 0;
+            switch (cmbmembresia.getSelectedIndex()) {
+                case 0:
+                    idmembresia = 4;
                     break;
-                  case 2:idmembresia=2;
+                case 1:
+                    idmembresia = 3;
                     break;
-                  case 3:idmembresia=1;
+                case 2:
+                    idmembresia = 2;
                     break;
-                   
-              }
-                cliente.setMembresia_id(idmembresia);
-               JOptionPane.showMessageDialog(rootPane, "se actualiza", "Registro de cliente", JOptionPane.INFORMATION_MESSAGE, frameIcon);
-              
-                ClienteService clienteservice=new ClienteServiceImpl();
-                clienteservice.update(cliente);
+                case 3:
+                    idmembresia = 1;
+                    break;
+
+            }
+            cliente.setMembresia_id(idmembresia);
+            JOptionPane.showMessageDialog(rootPane, "se actualiza", "Registro de cliente", JOptionPane.INFORMATION_MESSAGE, frameIcon);
+
+            ClienteService clienteservice = new ClienteServiceImpl();
+            clienteservice.update(cliente);
             JOptionPane.showMessageDialog(rootPane, "Registro actualizado correctamente", "Registro de cliente", JOptionPane.INFORMATION_MESSAGE, frameIcon);
             EstadoBotones(true);
             Limpiar();
-           CargarClientes();
-        
+            CargarClientes();
+
         }
     }//GEN-LAST:event_cmdguardarActionPerformed
 
@@ -496,7 +504,7 @@ public class frmRegistroClientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         //accion: 1 insert , 2 uupdate
-        accion=2;
+        accion = 2;
         EstadoBotones(false);
     }//GEN-LAST:event_cmdeditarActionPerformed
 
@@ -507,32 +515,44 @@ public class frmRegistroClientes extends javax.swing.JInternalFrame {
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         // TODO add your handling code here:
-        if (txtbuscar.getText().length() ==0) {
-             JOptionPane.showMessageDialog(rootPane, "Ingrese un texto para buscar", "Buscar cliente", JOptionPane.ERROR_MESSAGE, frameIcon);
-             return;
+        if (txtbuscar.getText().length() == 0) {
+            CargarClientes();
+        } else {
+            Cliente cli = arbolClientes.existe(txtbuscar.getText());
+            if (cli == null) {
+                JOptionPane.showMessageDialog(rootPane, "No se encontro un cliente con el texto " + txtbuscar.getText(), "Sin resultados", JOptionPane.ERROR_MESSAGE, frameIcon);
+            } else {
+                System.out.println(cli.getCliente_nombres());
+                dtm.setRowCount(0);
+                dtm.addRow(new Object[]{
+                    cli.getCliente_id(),
+                    cli.getDni(),
+                    cli.getCliente_nombres(),
+                    cli.getCliente_apellidos(),
+                    cli.getMembresia_nombre(),
+                    cli.getCliente_edad(),
+                    cli.getCliente_telefono(),});
+            }
         }
-        
-        
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void tblclientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblclientesMouseClicked
         // TODO add your handling code here:
-        
-         if (tblclientes.getRowCount()>0) {
+
+        if (tblclientes.getRowCount() > 0) {
 //             String[] headers = new String[]{"ID","dni","NOMBRE", "APELLIDOS", "MEMBRESIA", "EDAD", "TELEFONO"};
-            int fila=tblclientes.getSelectedRow();
-           
-            txtnombre.setText(tblclientes.getValueAt(fila,2).toString());
-            txtapellido.setText(tblclientes.getValueAt(fila,3).toString());
-            txtfono.setText(tblclientes.getValueAt(fila,6).toString());
-            txtdni.setText(tblclientes.getValueAt(fila,1).toString());
-            txtedad.setText(tblclientes.getValueAt(fila,5).toString());
-            
-            String membresia=tblclientes.getValueAt(fila,4).toString();
-            
+            int fila = tblclientes.getSelectedRow();
+
+            txtnombre.setText(tblclientes.getValueAt(fila, 2).toString());
+            txtapellido.setText(tblclientes.getValueAt(fila, 3).toString());
+            txtfono.setText(tblclientes.getValueAt(fila, 6).toString());
+            txtdni.setText(tblclientes.getValueAt(fila, 1).toString());
+            txtedad.setText(tblclientes.getValueAt(fila, 5).toString());
+
+            String membresia = tblclientes.getValueAt(fila, 4).toString();
+
             cmbmembresia.setSelectedItem(membresia);
-            
-            
+
         }
     }//GEN-LAST:event_tblclientesMouseClicked
 
