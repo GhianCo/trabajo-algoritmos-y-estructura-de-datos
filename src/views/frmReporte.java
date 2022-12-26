@@ -171,6 +171,7 @@ public class frmReporte extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Reporte(){
+        
         Connection cn =DBConn.getConnection();
         String empresa="CASA ALFAJOR S.A.C.";       
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
@@ -218,7 +219,7 @@ public class frmReporte extends javax.swing.JInternalFrame {
             MainForm.mainDesktop.add(frame);
             CentrarVentana(frame);
             frame.setVisible(true);
-            
+            this.dispose();
         } catch (Exception e) {
             System.out.println(e.toString());
         }

@@ -4,12 +4,18 @@
  */
 package models.dao.impl;
 
+import com.lowagie.text.pdf.codec.Base64;
+import java.security.Key;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import java.util.List;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+
 import models.dao.UsuarioDao;
 import models.entities.Usuario;
 import utils.DBConn;
@@ -30,8 +36,9 @@ public class UsuarioDaoDatabase implements UsuarioDao {
             connection.setAutoCommit(false);
             callableStatement = connection.prepareCall("{CALL sp_insert_Usuario(?,?)}");
 
-            callableStatement.setString(1,entity.getNombre());
-            callableStatement.setString(2,entity.getContraseña() );
+            
+            callableStatement.setString(1,entity.getNombre());           
+            callableStatement.setString(2,entity.getContraseña());
            
 
             callableStatement.executeUpdate();
@@ -54,6 +61,8 @@ public class UsuarioDaoDatabase implements UsuarioDao {
     public Usuario find(Object id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+ 
 
     @Override
     public List<Usuario> findAll() {
@@ -128,6 +137,7 @@ public class UsuarioDaoDatabase implements UsuarioDao {
              
             connection = DBConn.getConnection();
             callableStatement = connection.prepareCall("{CALL sp_find_Usuario(?,?)}");
+            
             callableStatement.setString(1, usuario.getNombre());
             callableStatement.setString(2, usuario.getContraseña());
             
@@ -158,7 +168,9 @@ public class UsuarioDaoDatabase implements UsuarioDao {
         return usuario_login;
 
      }
-
+ 
+   
+     
     @Override
     public void delete(Object id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -168,5 +180,10 @@ public class UsuarioDaoDatabase implements UsuarioDao {
     public List<Usuario> find_Cliente_Criterio(Object dni, Object nombre, Object criterio) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+ 
+
+    // Clave de encriptación / desencriptación
+  
     
 }

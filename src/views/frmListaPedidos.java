@@ -85,6 +85,7 @@ public class frmListaPedidos extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         btn2 = new javax.swing.JButton();
         btn1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -157,6 +158,18 @@ public class frmListaPedidos extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(jButton1);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/ver1.png"))); // NOI18N
+        jButton2.setText("Refrescar");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton2);
 
         btn2.setText("Ordenar aplicando prioridad");
         btn2.addActionListener(new java.awt.event.ActionListener() {
@@ -320,6 +333,11 @@ public class frmListaPedidos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         VerDetalle();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+           CargarPedidos();
+    }//GEN-LAST:event_jButton2ActionPerformed
     private void LimpiarTabla() {
         //se limpia la tabla para volver a llenar con la lista ordenada
 
@@ -426,6 +444,7 @@ public class frmListaPedidos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn2;
     private com.toedter.calendar.JDateChooser dtfecha;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

@@ -5,6 +5,7 @@
 package views;
 
 import java.awt.Image;
+import java.util.Base64;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -152,7 +153,8 @@ public class frmLogin extends javax.swing.JFrame {
          
            Usuario usuario=new Usuario();
             usuario.setNombre(txtusuario.getText());
-            usuario.setContraseña(String.valueOf(txtclave.getPassword()));
+            usuario.setContraseña(String.valueOf( txtclave.getPassword()));
+            
             UsuarioServiceImpl  usuarioservice= new UsuarioServiceImpl();
             usuario_login=usuarioservice.Login(usuario);
          
@@ -178,6 +180,7 @@ public class frmLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+   
     /**
      * @param args the command line arguments
      */
